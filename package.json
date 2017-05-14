@@ -1,0 +1,28 @@
+{
+  "name": "comp5347_project",
+  "version": "1.0.0",
+  "description": "an web application to have the data analytic",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cjcjiang/comp5347_project.git"
+  },
+  "author": "Yuming JIANG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cjcjiang/comp5347_project/issues"
+  },
+  "homepage": "https://github.com/cjcjiang/comp5347_project#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "mongoose": "^4.9.9",
+    "path": "^0.12.7",
+    "pug": "^2.0.0-rc.1"
+  }
+}
