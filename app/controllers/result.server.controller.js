@@ -1,7 +1,7 @@
 var Revision = require("../models/revision.js");
 
 module.exports.showHomepage = function(req,res){
-	res.render("overall.ejs");
+	res.render("homepage.ejs");
   console.log("Show the homepage");
 }
 
