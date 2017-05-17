@@ -18,11 +18,3 @@ module.exports.showResult = function(req,res){
 			}
 		});
 }
-
-// module.exports.showResult = function(req,res){
-// 	console.log("we are in show result");
-// 	result = Revision.findMostNumOfRev();
-// 	console.log("we have the result");
-// 	console.log(result);
-// 	res.json(result);
-// }
