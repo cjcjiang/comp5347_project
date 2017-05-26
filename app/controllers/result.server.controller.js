@@ -5,6 +5,16 @@ module.exports.showHomepage = function(req,res){
   console.log("Show the homepage");
 }
 
+module.exports.showOverall = function(req,res){
+    res.render("overall.ejs");
+    console.log("Show the overall page");
+}
+
+module.exports.showIndividual = function(req,res){
+    res.render("individual.ejs");
+    console.log("Show the individual page");
+}
+
 module.exports.showResult = function(req,res){
 	console.log("we are in show result");
 	Revision.findMostNumOfRev(function(err,result){
