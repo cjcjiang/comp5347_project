@@ -19,6 +19,15 @@ RevisionSchema.statics.findMostNumOfRev = function(callback){
 		.exec(callback);
 };
 
+RevisionSchema.statics.mjNumOfRev = function(callback){
+    return this.aggregate(
+        [
+            {$match:{title:"Michael Jackson"}},
+            {$group:{_id:"$title", numOfRev: {$sum:1}}}
+
+        ])
+        .exec(callback);
+};
 var Revision = mongoose.model('Revision', RevisionSchema, 'revisions');
 
 module.exports = Revision

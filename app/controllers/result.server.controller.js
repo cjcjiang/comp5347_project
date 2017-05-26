@@ -28,3 +28,18 @@ module.exports.showResult = function(req,res){
 			}
 		});
 }
+
+module.exports.showMjNumOfRevResult = function(req,res){
+    console.log("we are in show result");
+    Revision.mjNumOfRev(function(err,result){
+        if (err){
+            console.log("mjNumOfRev wrong");
+        }else{
+            console.log(result);
+            console.log("we have the result");
+            for(i=0;i<result.length;i++) {
+                res.json(result[i]);
+            }
+        }
+    });
+}
