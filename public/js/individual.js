@@ -6,6 +6,6 @@ $(document).ready(function(){
         event.preventDefault();
         var title = {title: $("#title_text").val()};
         console.log(title);
-        $("#individual_page").load("/showUpdateResult", title);
+        $("#individual_page").load("/showUpdateResultPage", title);
     });
 });

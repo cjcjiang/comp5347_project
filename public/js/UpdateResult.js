@@ -1,9 +1,18 @@
 $(document).ready(function(){
+    var title = $("#update_query_title").text();
+    var parameters = {user_query_title: title};
+
+    $.get( "/showUpdateResult",parameters, function(result){
+        console.log(result);
+        $('#update_result').html(result);
+        $('#continue_ref').html('<a href="/a" id="update_show">show individual result</a>');
+    });
+
+    // TODO: $("#update_show") does not work, try use another load
+
     $("#update_show").click(function(event){
         event.preventDefault();
-        var title = $("#update_query_title").text();
         console.log("title in updateresult js is: " + title);
-        var parameters = {user_query_title: title};
         $("#individual_page").load("/showIndividualResult", parameters);
     });
 });
