@@ -52,6 +52,61 @@ module.exports.showUpdateResult = function(req,res){
     });
 };
 
+// Yu update
+module.exports.showDataForOverallBarChartRegUser = function(req,res){
+    console.log("we are in showDataForOverallBarChartRegUser");
+    Revision.dataForOverallBarChartRegUser(title, function(err,result){
+        if (err){
+            console.log("dataForOverallBarChartRegUser wrong");
+        }else{
+            console.log(result);
+            console.log("we have the result of dataForOverallBarChartRegUser");
+            res.json(result);
+        }
+    });
+};
+
+module.exports.showDataForOverallBarChartAnonUser = function(req,res){
+    console.log("we are in showDataForOverallBarChartAnonUser");
+    Revision.dataForOverallBarChartAnonUser(title, function(err,result){
+        if (err){
+            console.log("dataForOverallBarChartAnonUser wrong");
+        }else{
+            console.log(result);
+            console.log("we have the result of DataForOverallBarChartAnonUser");
+            res.json(result);
+        }
+    });
+};
+
+module.exports.showDataForOverallBarChartAdminUser = function(req,res){
+    console.log("we are in showDataForOverallBarChartAdminUser");
+    Revision.dataForOverallBarChartAnonUser(title, function(err,result){
+        if (err){
+            console.log("dataForOverallBarChartAdminUser wrong");
+        }else{
+            console.log(result);
+            console.log("we have the result of DataForOverallBarChartAdminUser");
+            res.json(result);
+        }
+    });
+};
+
+module.exports.showDataForOverallBarChartBotUser = function(req,res){
+    console.log("we are in showDataForOverallBarChartBotUser");
+    Revision.dataForOverallBarChartBotUser(title, function(err,result){
+        if (err){
+            console.log("dataForOverallBarChartBotUser wrong");
+        }else{
+            console.log(result);
+            console.log("we have the result of DataForOverallBarChartBotUser");
+            res.json(result);
+        }
+    });
+};
+
+// Yu end
+
 module.exports.showIndividualResult = function(req,res){
     res.render("IndividualResult.ejs");
     console.log("Show the IndividualResult page");
