@@ -15,7 +15,7 @@ module.exports.showIndividual = function(req,res){
     console.log("Show the individual page");
 }
 
-module.exports.showJIANG = function(req,res){
+module.exports.showYu = function(req,res){
 	console.log("we are in show result");
 	Revision.findMostNumOfRev(function(err,result){
 			if (err){
