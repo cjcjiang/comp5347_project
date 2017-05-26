@@ -3,17 +3,17 @@ var Revision = require("../models/revision.js");
 module.exports.showHomepage = function(req,res){
 	res.render("homepage.ejs");
   console.log("Show the homepage");
-}
+};
 
 module.exports.showOverall = function(req,res){
     res.render("overall.ejs");
     console.log("Show the overall page");
-}
+};
 
 module.exports.showIndividual = function(req,res){
     res.render("individual.ejs");
     console.log("Show the individual page");
-}
+};
 
 module.exports.showMostNumOfRev = function(req,res){
 	console.log("we are in showMostNumOfRev");
@@ -27,11 +27,12 @@ module.exports.showMostNumOfRev = function(req,res){
 				res.json(data);
 			}
 		});
-}
+};
 
 module.exports.showMjNumOfRevResult = function(req,res){
+    title = req.query.title;
     console.log("we are in showMjNumOfRevResult");
-    Revision.mjNumOfRev(function(err,result){
+    Revision.mjNumOfRev(title, function(err,result){
         if (err){
             console.log("mjNumOfRev wrong");
         }else{
@@ -42,4 +43,4 @@ module.exports.showMjNumOfRevResult = function(req,res){
             }
         }
     });
-}
+};

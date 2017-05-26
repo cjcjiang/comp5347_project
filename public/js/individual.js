@@ -4,7 +4,8 @@ $(document).ready(function(){
 
     $("#show").click(function(event){
         event.preventDefault();
-        $.getJSON('/showMjNumOfRevResult',null, function(revision) {
+        var parameters = {title: $('#title_text').val() };
+        $.getJSON('/showMjNumOfRevResult',parameters, function(revision) {
             console.log(revision._id);
             console.log(revision.numOfRev);
             $("#result").html("The article with the most number of revisions is " + revision.numOfRev);

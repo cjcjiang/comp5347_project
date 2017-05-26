@@ -19,10 +19,10 @@ RevisionSchema.statics.findMostNumOfRev = function(callback){
 		.exec(callback);
 };
 
-RevisionSchema.statics.mjNumOfRev = function(callback){
+RevisionSchema.statics.mjNumOfRev = function(title, callback){
     return this.aggregate(
         [
-            {$match:{title:"Michael Jackson"}},
+            {$match:{title:title}},
             {$group:{_id:"$title", numOfRev: {$sum:1}}}
 
         ])
