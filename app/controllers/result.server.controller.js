@@ -47,8 +47,16 @@ module.exports.showUpdateResult = function(req,res){
     console.log("we are in showUpdateResult");
     title = req.body.title;
     console.log("title in showNumOfRevResult is: " + title);
-    res.render("UpdateResult.ejs", {
-        user_query_title: title
+    Revision.findLatestRevTimestamp(title, function(err,result){
+        if (err){
+            console.log("findLatestRevTimestamp wrong");
+        }else{
+            console.log(result);
+            console.log("we have the result of findLatestRevTimestamp");
+            res.render("UpdateResult.ejs", {
+                user_query_title: title,
+            });
+        }
     });
 };
 
