@@ -33,7 +33,7 @@ RevisionSchema.statics.findLatestRevTimestamp = function(title, callback){
     return this.aggregate(
         [
             {$match:{title:title}},
-            {$group:{_id:"$title", timesatmp: {$max:"$timestamp"}}}
+            {$group:{_id:"$title", timestamp: {$max:"$timestamp"}}}
         ])
         .exec(callback);
 };

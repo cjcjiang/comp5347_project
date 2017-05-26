@@ -8,7 +8,8 @@ router.get('/result', controller.showMostNumOfRev);
 router.get('/overall', controller.showOverall);
 router.get('/individual', controller.showIndividual);
 router.get('/showMjNumOfRevResult', controller.showNumOfRevResult);
-router.post('/showUpdateResult', controller.showUpdateResult);
+router.post('/showUpdateResultPage', controller.showUpdateResultPage);
 router.post("/showIndividualResult", controller.showIndividualResult);
+router.get('/showUpdateResult', controller.showUpdateResult);
 
 module.exports = router;
