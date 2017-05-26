@@ -15,14 +15,14 @@ module.exports.showIndividual = function(req,res){
     console.log("Show the individual page");
 }
 
-module.exports.showYu = function(req,res){
-	console.log("we are in show result");
+module.exports.showMostNumOfRev = function(req,res){
+	console.log("we are in showMostNumOfRev");
 	Revision.findMostNumOfRev(function(err,result){
 			if (err){
 				console.log("findMostNumOfRev wrong");
 			}else{
 				console.log(result);
-				console.log("we have the result");
+				console.log("we have the result of findMostNumOfRev");
 				data = result[0];
 				res.json(data);
 			}
@@ -30,13 +30,13 @@ module.exports.showYu = function(req,res){
 }
 
 module.exports.showMjNumOfRevResult = function(req,res){
-    console.log("we are in show result");
+    console.log("we are in showMjNumOfRevResult");
     Revision.mjNumOfRev(function(err,result){
         if (err){
             console.log("mjNumOfRev wrong");
         }else{
             console.log(result);
-            console.log("we have the result");
+            console.log("we have the result of mjNumOfRev");
             for(i=0;i<result.length;i++) {
                 res.json(result[i]);
             }
