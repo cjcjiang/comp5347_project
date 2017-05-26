@@ -19,7 +19,7 @@ RevisionSchema.statics.findMostNumOfRev = function(callback){
 		.exec(callback);
 };
 
-RevisionSchema.statics.mjNumOfRev = function(title, callback){
+RevisionSchema.statics.findNumOfRev = function(title, callback){
     return this.aggregate(
         [
             {$match:{title:title}},
@@ -28,6 +28,16 @@ RevisionSchema.statics.mjNumOfRev = function(title, callback){
         ])
         .exec(callback);
 };
+
+RevisionSchema.statics.findLatestRevTimestamp = function(title, callback){
+    return this.aggregate(
+        [
+            {$match:{title:title}},
+            {$group:{_id:"$title", timesatmp: {$max:"$timestamp"}}}
+        ])
+        .exec(callback);
+};
+
 var Revision = mongoose.model('Revision', RevisionSchema, 'revisions');
 
-module.exports = Revision
+module.exports = Revision;

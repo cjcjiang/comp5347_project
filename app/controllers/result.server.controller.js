@@ -29,18 +29,30 @@ module.exports.showMostNumOfRev = function(req,res){
 		});
 };
 
-module.exports.showMjNumOfRevResult = function(req,res){
+module.exports.showNumOfRevResult = function(req,res){
     title = req.query.title;
-    console.log("we are in showMjNumOfRevResult");
-    Revision.mjNumOfRev(title, function(err,result){
+    console.log("we are in showNumOfRevResult");
+    Revision.findNumOfRev(title, function(err,result){
         if (err){
-            console.log("mjNumOfRev wrong");
+            console.log("findNumOfRev wrong");
         }else{
             console.log(result);
-            console.log("we have the result of mjNumOfRev");
-            for(i=0;i<result.length;i++) {
-                res.json(result[i]);
-            }
+            console.log("we have the result of findNumOfRev");
+            res.json(result);
         }
     });
+};
+
+module.exports.showUpdateResult = function(req,res){
+    console.log("we are in showUpdateResult");
+    title = req.body.title;
+    console.log("title in showNumOfRevResult is: " + title);
+    res.render("UpdateResult.ejs", {
+        user_query_title: title
+    });
+};
+
+module.exports.showIndividualResult = function(req,res){
+    res.render("IndividualResult.ejs");
+    console.log("Show the IndividualResult page");
 };
