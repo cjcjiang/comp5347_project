@@ -31,6 +31,80 @@ module.exports.showMostNumOfRev = function(req,res){
 		});
 };
 
+// Overall task 2: The article with the least number of revisions
+module.exports.showLeastNumOfRev = function(req,res){
+    console.log("we are in showLeastNumOfRev");
+    Revision.findLeastNumOfRev(function(err,result){
+        if (err){
+            console.log("findLeastNumOfRev wrong");
+        }else{
+            console.log(result);
+            console.log("we have the result of findLeastNumOfRev");
+            data = result[0];
+            res.json(data);
+        }
+    });
+};
+
+// Overall task 3: The article edited by largest group of registered users
+module.exports.showArticleLargestRegUser = function(req,res){
+    console.log("we are in showArticleLargestRegUser");
+    Revision.findArticleLargestRegUser(function(err,result){
+        if (err){
+            console.log("findArticleLargestRegUser wrong");
+        }else{
+            console.log(result);
+            console.log("we have the result of findArticleLargestRegUser");
+            data = result[0];
+            res.json(data);
+        }
+    });
+};
+
+// Overall task 4: The article edited by smallest group of registered users
+module.exports.showArticleSmallestRegUser = function(req,res){
+    console.log("we are in showArticleLargestRegUser");
+    Revision.findArticleSmallestRegUser(function(err,result){
+        if (err){
+            console.log("findArticleSmallestRegUser wrong");
+        }else{
+            console.log(result);
+            console.log("we have the result of findArticleSmallestRegUser");
+            data = result[0];
+            res.json(data);
+        }
+    });
+};
+
+// Overall task 5: The article with the longest history
+module.exports.showArticleLongestHistory = function(req,res){
+    console.log("we are in showArticleLongestHistory");
+    Revision.findArticleLongestHistory(function(err,result){
+        if (err){
+            console.log("findArticleLongestHistory wrong");
+        }else{
+            console.log(result);
+            console.log("we have the result of findArticleLongestHistory");
+            data = result[0];
+            res.json(data);
+        }
+    });
+};
+
+// Overall task 6: The article with the shortest history
+module.exports.showArticleShortestHistory = function(req,res){
+    console.log("we are in showArticleShortestHistory");
+    Revision.findArticleShortestHistory(function(err,result){
+        if (err){
+            console.log("findArticleShortestHistory wrong");
+        }else{
+            console.log(result);
+            console.log("we have the result of findArticleShortestHistory");
+            data = result[0];
+            res.json(data);
+        }
+    });
+};
 // Individual task 2: The total number of revisions for selected article
 module.exports.showNumOfRevResult = function(req,res){
     title = req.query.title;

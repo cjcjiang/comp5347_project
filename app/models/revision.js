@@ -20,6 +20,61 @@ RevisionSchema.statics.findMostNumOfRev = function(callback){
 		.exec(callback);
 };
 
+// Overall task 2: The article with the least number of revisions
+RevisionSchema.statics.findLeastNumOfRev = function(callback){
+    return this.aggregate(
+        [
+            {$group:{_id:"$title", numOfRev: {$sum:1}}},
+            {$sort:{numOfRev:1}},
+            {$limit:1}
+        ])
+        .exec(callback);
+};
+
+// Overall task 3: The article edited by largest group of registered users
+RevisionSchema.statics.findArticleLargestRegUser = function(callback){
+    return this.aggregate([
+        {"$match": { "$and":[{"anon":{"$exists":false}}, {"user":{"$nin":["5 albert square"]}}, {"user":{"$nin":["User"]}}]}},
+        {"$group": {"_id": {"title": "$title", "user": "$user"}}},
+        {"$group": {"_id": "$_id.title", "numOfUser": {$sum: 1}}},
+        {"$sort": {"numOfUser": -1}},
+        {"$limit":1}
+    ])
+        .exec(callback);
+};
+
+// Overall task 4: The article edited by smallest group of registered users
+RevisionSchema.statics.findArticleSmallestRegUser = function(callback){
+    return this.aggregate([
+        {"$match": { "$and":[{"anon":{"$exists":false}}, {"user":{"$nin":["5 albert square"]}}, {"user":{"$nin":["User"]}}]}},
+        {"$group": {"_id": {"title": "$title", "user": "$user"}}},
+        {"$group": {"_id": "$_id.title", "numOfUser": {$sum: 1}}},
+        {"$sort": {"numOfUser": 1}},
+        {"$limit":1}
+    ])
+        .exec(callback);
+};
+
+// Overall task 5: The article with the longest history
+RevisionSchema.statics.findArticleLongestHistory = function(callback){
+    return this.aggregate([
+        {$group:{_id:"$title", time:{$max:"$timestamp"}}},
+        {$sort:{time:-1}},
+        {$limit:1}
+    ])
+        .exec(callback);
+};
+
+// Overall task 6: The article with the shortest history
+RevisionSchema.statics.findArticleShortestHistory = function(callback){
+    return this.aggregate([
+        {$group:{_id:"$title", time:{$max:"$timestamp"}}},
+        {$sort:{time:1}},
+        {$limit:1}
+    ])
+        .exec(callback);
+};
+
 // Individual task 2: The total number of revisions for selected article
 RevisionSchema.statics.findNumOfRev = function(title, callback){
     return this.aggregate(
@@ -40,6 +95,8 @@ RevisionSchema.statics.findLatestRevTimestamp = function(title, callback){
         ])
         .exec(callback);
 };
+
+
 
 // Overall chart 1 (bar chart) Registered User
 RevisionSchema.statics.dataForOverallBarChartRegUser = function(callback){
