@@ -9,6 +9,7 @@ var RevisionSchema = new mongoose.Schema(
 		 user:String,
 		 anon:String});
 
+// Overall task 1: The article with the most number of revisions
 RevisionSchema.statics.findMostNumOfRev = function(callback){
 	return this.aggregate(
     [
@@ -19,6 +20,7 @@ RevisionSchema.statics.findMostNumOfRev = function(callback){
 		.exec(callback);
 };
 
+// Individual task 2: The total number of revisions for selected article
 RevisionSchema.statics.findNumOfRev = function(title, callback){
     return this.aggregate(
         [
@@ -29,6 +31,7 @@ RevisionSchema.statics.findNumOfRev = function(title, callback){
         .exec(callback);
 };
 
+//  for Jiang's request: find latest revision timestamp for selected article
 RevisionSchema.statics.findLatestRevTimestamp = function(title, callback){
     return this.aggregate(
         [
@@ -38,7 +41,7 @@ RevisionSchema.statics.findLatestRevTimestamp = function(title, callback){
         .exec(callback);
 };
 
-// Yu update
+// Overall chart 1 (bar chart) Registered User
 RevisionSchema.statics.dataForOverallBarChartRegUser = function(title, callback){
     return this.aggregate([
         {$match: {$and:[{"anon":{"$exists":false}}, {"user":{"$nin":["5 albert square"]}}, {"user":{"$nin":["User"]}}]}},
@@ -48,6 +51,7 @@ RevisionSchema.statics.dataForOverallBarChartRegUser = function(title, callback)
         .exec(callback);
 };
 
+// Overall chart 1 (bar chart) Anonymous
 RevisionSchema.statics.dataForOverallBarChartAnonUser = function(title, callback){
     return this.aggregate([
         {$match: {"anon":{"$exists":true}}},
@@ -57,6 +61,7 @@ RevisionSchema.statics.dataForOverallBarChartAnonUser = function(title, callback
         .exec(callback);
 };
 
+// Overall chart 1 (bar chart) Administrator
 RevisionSchema.statics.dataForOverallBarChartAdminUser = function(title, callback){
     return this.aggregate([
         {$match: {"user":{"$in":["5 albert square"]}}},
@@ -66,6 +71,7 @@ RevisionSchema.statics.dataForOverallBarChartAdminUser = function(title, callbac
         .exec(callback);
 };
 
+// Overall chart 1 (bar chart) Bot
 RevisionSchema.statics.dataForOverallBarChartBotUser = function(title, callback){
     return this.aggregate([
         {$match: {"user":{"$in":["User"]}}},
@@ -74,8 +80,6 @@ RevisionSchema.statics.dataForOverallBarChartBotUser = function(title, callback)
     ])
         .exec(callback);
 };
-
-// Yu end
 
 var Revision = mongoose.model('Revision', RevisionSchema, 'revisions');
 

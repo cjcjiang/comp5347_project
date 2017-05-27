@@ -97,10 +97,10 @@ module.exports.showDataForOverallBarChartBotUser = function(req,res){
     Revision.dataForOverallBarChartBotUser(title, function(err,result){
         if (err){
             console.log("dataForOverallBarChartBotUser wrong");
-        }else{
+        }else {
             console.log(result);
             console.log("we have the result of DataForOverallBarChartBotUser");
-            res.json(result);
+            res.json(result);}});}
 
 module.exports.showUpdateResult = function(req,res){
     title = req.query.title;
@@ -157,7 +157,7 @@ module.exports.showUpdateResult = function(req,res){
     });
 };
 
-module.exports.showIndividualResult = function(req,res){
+module.exports.showIndividualResult = function(req,res) {
     res.render("IndividualResult.ejs");
     console.log("Show the IndividualResult page");
 };
