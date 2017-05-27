@@ -16,6 +16,7 @@ module.exports.showIndividual = function(req,res){
     console.log("Show the individual page");
 };
 
+// Overall task 1: The article with the most number of revisions
 module.exports.showMostNumOfRev = function(req,res){
 	console.log("we are in showMostNumOfRev");
 	Revision.findMostNumOfRev(function(err,result){
@@ -30,6 +31,7 @@ module.exports.showMostNumOfRev = function(req,res){
 		});
 };
 
+// Individual task 2: The total number of revisions for selected article
 module.exports.showNumOfRevResult = function(req,res){
     title = req.query.title;
     console.log("we are in showNumOfRevResult");
@@ -53,9 +55,10 @@ module.exports.showUpdateResultPage = function(req,res){
     });
 };
 
+// Overall chart 1 (bar chart) Registered User
 module.exports.showDataForOverallBarChartRegUser = function(req,res){
     console.log("we are in showDataForOverallBarChartRegUser");
-    Revision.dataForOverallBarChartRegUser(title, function(err,result){
+    Revision.dataForOverallBarChartRegUser(function(err,result){
         if (err){
             console.log("dataForOverallBarChartRegUser wrong");
         }else{
@@ -66,9 +69,10 @@ module.exports.showDataForOverallBarChartRegUser = function(req,res){
     });
 };
 
+// Overall chart 1 (bar chart) Anonymous
 module.exports.showDataForOverallBarChartAnonUser = function(req,res){
     console.log("we are in showDataForOverallBarChartAnonUser");
-    Revision.dataForOverallBarChartAnonUser(title, function(err,result){
+    Revision.dataForOverallBarChartAnonUser(function(err,result){
         if (err){
             console.log("dataForOverallBarChartAnonUser wrong");
         }else{
@@ -79,9 +83,10 @@ module.exports.showDataForOverallBarChartAnonUser = function(req,res){
     });
 };
 
+// Overall chart 1 (bar chart) Administrator
 module.exports.showDataForOverallBarChartAdminUser = function(req,res){
     console.log("we are in showDataForOverallBarChartAdminUser");
-    Revision.dataForOverallBarChartAnonUser(title, function(err,result){
+    Revision.dataForOverallBarChartAnonUser(function(err,result){
         if (err){
             console.log("dataForOverallBarChartAdminUser wrong");
         }else{
@@ -92,16 +97,77 @@ module.exports.showDataForOverallBarChartAdminUser = function(req,res){
     });
 };
 
+// Overall chart 1 (bar chart) Bot
 module.exports.showDataForOverallBarChartBotUser = function(req,res){
     console.log("we are in showDataForOverallBarChartBotUser");
-    Revision.dataForOverallBarChartBotUser(title, function(err,result){
+    Revision.dataForOverallBarChartBotUser(function(err,result){
         if (err){
             console.log("dataForOverallBarChartBotUser wrong");
         }else {
             console.log(result);
             console.log("we have the result of DataForOverallBarChartBotUser");
-            res.json(result);}});}
+            res.json(result);
+        }
+    });
+};
 
+// Overall chart 2 (pie chart) Registered User
+module.exports.showDataForOverallPieChartRegUser = function(req,res){
+    console.log("we are in showDataForOverallPieChartRegUser");
+    Revision.dataForOverallPieChartRegUser(function(err,result){
+        if (err){
+            console.log("dataForOverallPieChartRegUser wrong");
+        }else {
+            console.log(result);
+            console.log("we have the result of DataForOverallPieChartRegUser");
+            res.json(result);
+        }
+    });
+};
+
+// Overall chart 2 (pie chart) Anonymous
+module.exports.showDataForOverallPieChartAnonUser = function(req,res){
+    console.log("we are in showDataForOverallPieChartAnonUser");
+    Revision.dataForOverallPieChartAnonUser(function(err,result){
+        if (err){
+            console.log("dataForOverallPieChartAnonUser wrong");
+        }else {
+            console.log(result);
+            console.log("we have the result of DataForOverallPieChartAnonUser");
+            res.json(result);
+        }
+    });
+};
+
+// Overall chart 2 (pie chart) Administrator
+module.exports.showDataForOverallPieChartAdminUser = function(req,res){
+    console.log("we are in showDataForOverallPieChartAdminUser");
+    Revision.dataForOverallPieChartAdminUser(function(err,result){
+        if (err){
+            console.log("dataForOverallPieChartAdminUser wrong");
+        }else {
+            console.log(result);
+            console.log("we have the result of DataForOverallPieChartAdminUser");
+            res.json(result);
+        }
+    });
+};
+
+// Overall chart 2 (pie chart) Bot
+module.exports.showDataForOverallPieChartBotUser = function(req,res){
+    console.log("we are in showDataForOverallPieChartBotUser");
+    Revision.dataForOverallPieChartBotUser(function(err,result){
+        if (err){
+            console.log("dataForOverallPieChartBotUser wrong");
+        }else {
+            console.log(result);
+            console.log("we have the result of DataForOverallPieChartBotUser");
+            res.json(result);
+        }
+    });
+};
+
+//  for Jiang's request: find latest revision timestamp for selected article
 module.exports.showUpdateResult = function(req,res){
     title = req.query.title;
     Revision.findLatestRevTimestamp(title, function(err,result_array){

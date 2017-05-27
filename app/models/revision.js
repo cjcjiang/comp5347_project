@@ -42,7 +42,7 @@ RevisionSchema.statics.findLatestRevTimestamp = function(title, callback){
 };
 
 // Overall chart 1 (bar chart) Registered User
-RevisionSchema.statics.dataForOverallBarChartRegUser = function(title, callback){
+RevisionSchema.statics.dataForOverallBarChartRegUser = function(callback){
     return this.aggregate([
         {$match: {$and:[{"anon":{"$exists":false}}, {"user":{"$nin":["5 albert square"]}}, {"user":{"$nin":["User"]}}]}},
         {$group:{_id:{year:{ $substr: ["$timestamp", 0, 4] }}, numOfRev: {$sum:1}}},
@@ -52,7 +52,7 @@ RevisionSchema.statics.dataForOverallBarChartRegUser = function(title, callback)
 };
 
 // Overall chart 1 (bar chart) Anonymous
-RevisionSchema.statics.dataForOverallBarChartAnonUser = function(title, callback){
+RevisionSchema.statics.dataForOverallBarChartAnonUser = function(callback){
     return this.aggregate([
         {$match: {"anon":{"$exists":true}}},
         {$group:{_id:{year:{ $substr: ["$timestamp", 0, 4] }}, numOfRev: {$sum:1}}},
@@ -62,7 +62,7 @@ RevisionSchema.statics.dataForOverallBarChartAnonUser = function(title, callback
 };
 
 // Overall chart 1 (bar chart) Administrator
-RevisionSchema.statics.dataForOverallBarChartAdminUser = function(title, callback){
+RevisionSchema.statics.dataForOverallBarChartAdminUser = function(callback){
     return this.aggregate([
         {$match: {"user":{"$in":["5 albert square"]}}},
         {$group:{_id:{year:{ $substr: ["$timestamp", 0, 4] }}, numOfRev: {$sum:1}}},
@@ -72,7 +72,7 @@ RevisionSchema.statics.dataForOverallBarChartAdminUser = function(title, callbac
 };
 
 // Overall chart 1 (bar chart) Bot
-RevisionSchema.statics.dataForOverallBarChartBotUser = function(title, callback){
+RevisionSchema.statics.dataForOverallBarChartBotUser = function(callback){
     return this.aggregate([
         {$match: {"user":{"$in":["User"]}}},
         {$group:{_id:{year:{ $substr: ["$timestamp", 0, 4] }}, numOfRev: {$sum:1}}},
@@ -80,6 +80,43 @@ RevisionSchema.statics.dataForOverallBarChartBotUser = function(title, callback)
     ])
         .exec(callback);
 };
+
+// Overall chart 2 (pie chart) Registered User
+RevisionSchema.statics.dataForOverallPieChartRegUser = function(callback){
+    return this.aggregate([
+        {$match: {$and:[{"anon":{"$exists":false}}, {"user":{"$nin":["5 albert square"]}}, {"user":{"$nin":["User"]}}]}},
+        {$count: "RegUsers"}
+    ])
+        .exec(callback);
+};
+
+// Overall chart 2 (pie chart) Anonymous
+RevisionSchema.statics.dataForOverallPieChartAnonUser = function(callback){
+    return this.aggregate([
+        {$match: {"anon":{"$exists":true}}},
+        {$count: "AnonUsers"}
+    ])
+        .exec(callback);
+};
+
+// Overall chart 2 (pie chart) Administrator
+RevisionSchema.statics.dataForOverallPieChartAdminUser = function(callback){
+    return this.aggregate([
+        {$match: {"user":{"$in":["5 albert square"]}}},
+        {$count: "AdminUsers"}
+    ])
+        .exec(callback);
+};
+
+// Overall chart 2 (pie chart) Bot
+RevisionSchema.statics.dataForOverallPieChartBotUser = function(callback){
+    return this.aggregate([
+        {$match: {"user":{"$in":["User"]}}},
+        {$count: "AnonUsers"}
+    ])
+        .exec(callback);
+};
+
 
 var Revision = mongoose.model('Revision', RevisionSchema, 'revisions');
 
