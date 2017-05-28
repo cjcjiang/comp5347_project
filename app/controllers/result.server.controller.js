@@ -1,5 +1,6 @@
 var Revision = require("../models/revision.js");
 var request = require('request');
+var express = require('express');
 
 module.exports.showHomepage = function(req,res){
 	res.render("homepage.ejs");
@@ -245,7 +246,8 @@ module.exports.showDataForOverallPieChartBotUser = function(req,res){
 
 //  for Jiang's request: find latest revision timestamp for selected article
 module.exports.showUpdateResult = function(req,res){
-    title = req.query.title;
+    var title = req.query.user_query_title;
+    console.log("in showUpdateResult: " + title);
     Revision.findLatestRevTimestamp(title, function(err,result_array){
         if (err){
             console.log("findLatestRevTimestamp wrong");
@@ -253,18 +255,19 @@ module.exports.showUpdateResult = function(req,res){
             console.log(result_array);
             console.log("we have the result of findLatestRevTimestamp");
 
-            //var latestTimestamp = result_array[0].timestamp;
-            //console.log(latestTimestamp);
-            // TODO: Make the timestamp in the query can be changed
+            var latestTimestamp = result_array[0].timestamp;
+            // 2016-04-20T16:18:51Z
+            console.log("in findLatestRevTimestamp the timestamp is: " + latestTimestamp);
 
             // Have the request to MediaWikiApi
             var wikiEndpoint = "https://en.wikipedia.org/w/api.php";
+            // "rvstart=2016-11-01T11:56:22Z",
             parameters = [
                 "action=query",
                 "format=json",
                 "prop=revisions",
                 "titles=australia",
-                "rvstart=2016-11-01T11:56:22Z",
+                "rvstart=" + latestTimestamp,
                 "rvdir=newer",
                 "rvlimit=max",
                 "rvprop=timestamp|userid|user|ids"];
