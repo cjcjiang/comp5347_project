@@ -8,10 +8,28 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 var result = require('./app/routes/result.server.routes.js');
-
+var fs = require('fs');
 var app = express();
 
-app.locals.products = ['iphone7', 'huaweip9', 'Pixel XL', 'Samsung S7'];
+fs.readFile("bot.txt", function(error, data){
+    if(error){
+        console.log("Read bot.txt error")
+    }
+    else {
+        app.locals.bot = data.toString().split("\n");
+        console.log("Read bot.txt success");
+    }
+});
+
+fs.readFile("admin.txt", function(error, data){
+    if(error){
+        console.log("Read bot.txt error")
+    }
+    else {
+        app.locals.admin = data.toString().split("\n");
+        console.log("Read admin.txt success");
+    }
+});
 
 // Set the path that contains the views to ./app/views
 app.set('views', path.join(__dirname,'app','views'));
