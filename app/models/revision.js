@@ -174,6 +174,13 @@ RevisionSchema.statics.dataForOverallPieChartBotUser = function(bot, callback){
         .exec(callback);
 };
 
+// To keep data updated, insert updated data
+RevisionSchema.statics.InsertJsonArray= function(array, callback){
+     return this.insertMany([
+         array
+    ])
+        .exec(callback);
+};
 
 var Revision = mongoose.model('Revision', RevisionSchema, 'revisions');
 
