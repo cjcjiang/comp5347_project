@@ -6,6 +6,9 @@ $(document).ready(function(){
         event.preventDefault();
         var title = {title: $("#title_text").val()};
         console.log(title);
+
+        // TODO: Check if this title need to have the update
+
         $("#individual_page").load("/showUpdateResultPage", title);
     });
 });
