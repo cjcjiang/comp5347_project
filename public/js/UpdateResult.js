@@ -1,6 +1,7 @@
 $(document).ready(function(){
     var title = $("#update_query_title").text();
-    var parameters = {user_query_title: title};
+    var timestamp = $("#update_query_timestamp").text();
+    var parameters = {user_query_title: title, user_query_timestamp: timestamp};
 
     $("#update_show").hide();
 

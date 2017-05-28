@@ -11,8 +11,6 @@ var result = require('./app/routes/result.server.routes.js');
 
 var app = express();
 
-app.locals.products = ['iphone7', 'huaweip9', 'Pixel XL', 'Samsung S7'];
-
 // Set the path that contains the views to ./app/views
 app.set('views', path.join(__dirname,'app','views'));
 app.use(express.static(path.join(__dirname, 'public')));
