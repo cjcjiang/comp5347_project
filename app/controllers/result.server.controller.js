@@ -1,6 +1,6 @@
 var Revision = require("../models/revision.js");
 var request = require('request');
-var fs = require("fs");
+var express = require('express');
 
 module.exports.showHomepage = function(req,res){
 	res.render("homepage.ejs");
@@ -50,8 +50,8 @@ module.exports.showLeastNumOfRev = function(req,res){
 // Overall task 3: The article edited by largest group of registered users
 module.exports.showArticleLargestRegUser = function(req,res){
     console.log("we are in showArticleLargestRegUser");
-    var admin = req.app.locals.admin;
-    var bot = req.app.locals.bot;
+    admin = req.app.locals.admin;
+    bot = req.app.locals.bot;
     Revision.findArticleLargestRegUser(admin, bot, function(err,result){
         if (err){
             console.log("findArticleLargestRegUser wrong");
@@ -67,8 +67,8 @@ module.exports.showArticleLargestRegUser = function(req,res){
 // Overall task 4: The article edited by smallest group of registered users
 module.exports.showArticleSmallestRegUser = function(req,res){
     console.log("we are in showArticleLargestRegUser");
-    var admin = req.app.locals.admin;
-    var bot = req.app.locals.bot;
+    admin = req.app.locals.admin;
+    bot = req.app.locals.bot;
     Revision.findArticleSmallestRegUser(admin, bot, function(err,result){
         if (err){
             console.log("findArticleSmallestRegUser wrong");
@@ -137,8 +137,8 @@ module.exports.showUpdateResultPage = function(req,res){
 // Overall chart 1 (bar chart) Registered User
 module.exports.showDataForOverallBarChartRegUser = function(req,res){
     console.log("we are in showDataForOverallBarChartRegUser");
-    var admin = req.app.locals.admin;
-    var bot = req.app.locals.bot;
+    admin = req.app.locals.admin;
+    bot = req.app.locals.bot;
     Revision.dataForOverallBarChartRegUser(admin, bot, function(err,result){
         if (err){
             console.log("dataForOverallBarChartRegUser wrong");
@@ -167,7 +167,7 @@ module.exports.showDataForOverallBarChartAnonUser = function(req,res){
 // Overall chart 1 (bar chart) Administrator
 module.exports.showDataForOverallBarChartAdminUser = function(req,res){
     console.log("we are in showDataForOverallBarChartAdminUser");
-    var admin = req.app.locals.admin;
+    admin = req.app.locals.admin;
     Revision.dataForOverallBarChartAnonUser(admin, function(err,result){
         if (err){
             console.log("dataForOverallBarChartAdminUser wrong");
@@ -182,7 +182,7 @@ module.exports.showDataForOverallBarChartAdminUser = function(req,res){
 // Overall chart 1 (bar chart) Bot
 module.exports.showDataForOverallBarChartBotUser = function(req,res){
     console.log("we are in showDataForOverallBarChartBotUser");
-    var bot = req.app.locals.bot;
+    bot = req.app.locals.bot;
     Revision.dataForOverallBarChartBotUser(bot, function(err,result){
         if (err){
             console.log("dataForOverallBarChartBotUser wrong");
@@ -197,8 +197,8 @@ module.exports.showDataForOverallBarChartBotUser = function(req,res){
 // Overall chart 2 (pie chart) Registered User
 module.exports.showDataForOverallPieChartRegUser = function(req,res){
     console.log("we are in showDataForOverallPieChartRegUser");
-    var admin = req.app.locals.admin;
-    var bot = req.app.locals.bot;
+    admin = req.app.locals.admin;
+    bot = req.app.locals.bot;
     Revision.dataForOverallPieChartRegUser(admin, bot, function(err,result){
         if (err){
             console.log("dataForOverallPieChartRegUser wrong");
@@ -227,7 +227,7 @@ module.exports.showDataForOverallPieChartAnonUser = function(req,res){
 // Overall chart 2 (pie chart) Administrator
 module.exports.showDataForOverallPieChartAdminUser = function(req,res){
     console.log("we are in showDataForOverallPieChartAdminUser");
-    var admin = req.app.locals.admin;
+    admin = req.app.locals.admin;
     Revision.dataForOverallPieChartAdminUser(admin, function(err,result){
         if (err){
             console.log("dataForOverallPieChartAdminUser wrong");
@@ -242,7 +242,7 @@ module.exports.showDataForOverallPieChartAdminUser = function(req,res){
 // Overall chart 2 (pie chart) Bot
 module.exports.showDataForOverallPieChartBotUser = function(req,res){
     console.log("we are in showDataForOverallPieChartBotUser");
-    var bot  = req.app.locals.bot;
+    bot  = req.app.locals.bot;
     Revision.dataForOverallPieChartBotUser(bot, function(err,result){
         if (err){
             console.log("dataForOverallPieChartBotUser wrong");
