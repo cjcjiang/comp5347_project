@@ -8,8 +8,27 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 var result = require('./app/routes/result.server.routes.js');
-
+var fs = require('fs');
 var app = express();
+
+// initial local variables Yu
+app.locals.bot = fs.readFile("bot.txt", function(error, data){
+    if(error){
+        console.log("Reading bot.txt error")
+    }
+    var bot = data.toString().split("\n");
+    console.log("Load bot.txt success");
+});
+
+app.locals.admin = fs.readFile("admin.txt", function(error, data){
+    if(error){
+        console.log("Reading bot.txt error")
+    }
+    var admin = data.toString().split("\n");
+    console.log("load admin.txt success");
+});
+
+// end
 
 // Set the path that contains the views to ./app/views
 app.set('views', path.join(__dirname,'app','views'));
