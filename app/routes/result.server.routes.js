@@ -11,16 +11,16 @@ router.get('/individual', controller.showIndividual);
 // Overall task 2: The article with the least number of revisions
 router.get('/showLeastNumOfRev', controller.showLeastNumOfRev);
 // Overall task 3: The article edited by largest group of registered users
-router.get('/showArticleLargestRegUser', controller.showArticleLargestRegUser());
+router.get('/showArticleLargestRegUser', controller.showArticleLargestRegUser);
 // Overall task 4: The article edited by smallest group of registered users
-router.get('/showArticleSmallestRegUser', controller.showArticleSmallestRegUser());
+router.get('/showArticleSmallestRegUser', controller.showArticleSmallestRegUser);
 // Overall task 5: The article with the longest history
-router.get('/showArticleLongestHistory', controller.showArticleLongestHistory());
+router.get('/showArticleLongestHistory', controller.showArticleLongestHistory);
 // Overall task 6: The article with the shortest history
-router.get('/showArticleShortestHistory', controller.showArticleShortestHistory());
+router.get('/showArticleShortestHistory', controller.showArticleShortestHistory);
 
 // Individual task 2
-router.get('/showMjNumOfRevResult', controller.showNumOfRevResult);
+router.get('/showNumOfRevForSpecificTitle', controller.showNumOfRevForSpecificTitle);
 // Overall chart 1 (bar chart) Registered User
 router.get('/showDataForOverallBarChartRegUser', controller.showDataForOverallBarChartRegUser);
 // Overall chart 1 (bar chart) Anonymous
@@ -30,7 +30,7 @@ router.get('/showDataForOverallBarChartAdminUser', controller.showDataForOverall
 // Overall chart 1 (bar chart) Bot
 router.get('/showDataForOverallBarChartBotUser', controller.showDataForOverallBarChartBotUser);
 // Overall chart 2 (pie chart) Registered User
-router.get('/showDataForOverallPieChartRegUser', controller.showDataForOverallPieChartRegUser());
+router.get('/showDataForOverallPieChartRegUser', controller.showDataForOverallPieChartRegUser);
 // Overall chart 2 (pie chart) Anonymous
 router.get('/showDataForOverallPieChartAnonUser', controller.showDataForOverallPieChartAnonUser);
 // Overall chart 2 (pie chart) Administrator

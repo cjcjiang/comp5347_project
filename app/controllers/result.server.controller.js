@@ -105,17 +105,19 @@ module.exports.showArticleShortestHistory = function(req,res){
         }
     });
 };
+
 // Individual task 2: The total number of revisions for selected article
-module.exports.showNumOfRevResult = function(req,res){
+module.exports.showNumOfRevForSpecificTitle = function(req,res){
     title = req.query.title;
-    console.log("we are in showNumOfRevResult");
+    console.log("we are in showNumOfRevForSpecificTitle");
     Revision.findNumOfRev(title, function(err,result){
         if (err){
             console.log("findNumOfRev wrong");
         }else{
             console.log(result);
             console.log("we have the result of findNumOfRev");
-            res.json(result);
+            var data = result[0];
+            res.json(data);
         }
     });
 };
@@ -297,7 +299,10 @@ module.exports.showUpdateResult = function(req,res){
     });
 };
 
+// Show IndividualResult.ejs
 module.exports.showIndividualResult = function(req,res) {
-    res.render("IndividualResult.ejs");
+    var title = req.body.user_query_title;
+    res.render("IndividualResult.ejs", {user_query_title: title});
+    console.log("The title for the IndividualResult page: " + title);
     console.log("Show the IndividualResult page");
 };
