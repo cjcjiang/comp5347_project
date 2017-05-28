@@ -328,8 +328,16 @@ module.exports.showUpdateResult = function(req,res){
                         }
                         console.log("db_update_data's title is: " + db_update_data[0].title);
 
-                        back_client_message = "<p>This is the back client message: There are " + revisions.length + " revisions.</p>";
-                        res.send(back_client_message);
+                        Revision.collection.insert(db_update_data, function(err,docs){
+                            if(err){
+                                console.log("insert error");
+                            }else{
+                                back_client_message = "<p>This is the back client message: There are " + revisions.length + " revisions added into the database.</p>";
+                                res.send(back_client_message);
+                            }
+                        });
+
+
                     }
                 });
             }else{
