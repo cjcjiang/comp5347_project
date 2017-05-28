@@ -264,7 +264,7 @@ module.exports.showUpdateResult = function(req,res){
             var latest_revision_date = Date.parse(latestRevisionTimestamp);
             var user_query_date = Date.parse(user_query_timestamp);
             // 2015-11-01T11:56:22Z, this line is only for bug test
-            user_query_date = Date.parse("2015-11-01T11:56:22Z");
+            // user_query_date = Date.parse("2015-11-01T11:56:22Z");
 
             // When the difference is one day, the difference number should be more than 86400000
             if((user_query_date-latest_revision_date)>86400000){
@@ -304,6 +304,15 @@ module.exports.showUpdateResult = function(req,res){
                         console.log("The first one got is:  " + revisions[0]);
 
                         // TODO: Update the database
+                        // Prepare the data that need to be transmitted to mongoose
+                        console.log(title);
+                        var db_update_data = [];
+                        for(var i=0; i<revisions.length; i++){
+                            var revisions_with_title = revisions[i];
+                            revisions_with_title["title"] = title;
+                            db_update_data.push(revisions_with_title);
+                        }
+                        console.log("db_update_data's title is: " + db_update_data[0].title);
 
                         back_client_message = "<p>This is the back client message: There are " + revisions.length + " revisions.</p>";
                         res.send(back_client_message);
