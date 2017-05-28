@@ -129,11 +129,14 @@ module.exports.showNumOfRevForSpecificTitle = function(req,res){
 };
 
 module.exports.showUpdateResultPage = function(req,res){
-    console.log("we are in showUpdateResult");
-    title = req.body.title;
-    console.log("title in showNumOfRevResult is: " + title);
+    console.log("we are in showUpdateResultPage");
+    var title = req.body.title;
+    var timestamp = req.body.timestamp;
+    console.log("title in showUpdateResultPage is: " + title);
+    console.log("timestamp in showUpdateResultPage is: " + timestamp);
     res.render("UpdateResult.ejs", {
-        user_query_title: title
+        user_query_title: title,
+        user_query_timestamp: timestamp
     });
 };
 
@@ -261,6 +264,7 @@ module.exports.showDataForOverallPieChartBotUser = function(req,res){
 //  for Jiang's request: find latest revision timestamp for selected article
 module.exports.showUpdateResult = function(req,res){
     var title = req.query.user_query_title;
+    var user_query_timestamp = req.query.user_query_timestamp;
     console.log("in showUpdateResult: " + title);
     Revision.findLatestRevTimestamp(title, function(err,result_array){
         if (err){
@@ -269,49 +273,72 @@ module.exports.showUpdateResult = function(req,res){
             console.log(result_array);
             console.log("we have the result of findLatestRevTimestamp");
 
-            var latestTimestamp = result_array[0].timestamp;
-            // 2016-04-20T16:18:51Z
-            console.log("in findLatestRevTimestamp the timestamp is: " + latestTimestamp);
+            var latestRevisionTimestamp = result_array[0].timestamp;
+            console.log("in findLatestRevTimestamp the latestRevisionTimestamp is: " + latestRevisionTimestamp);
+            var latest_revision_date = Date.parse(latestRevisionTimestamp);
+            var user_query_date = Date.parse(user_query_timestamp);
+            // 2015-11-01T11:56:22Z, this line is only for bug test
+            // user_query_date = Date.parse("2015-11-01T11:56:22Z");
 
-            // Have the request to MediaWikiApi
-            var wikiEndpoint = "https://en.wikipedia.org/w/api.php";
-            // "rvstart=2016-11-01T11:56:22Z",
-            parameters = [
-                "action=query",
-                "format=json",
-                "prop=revisions",
-                "titles=australia",
-                "rvstart=" + latestTimestamp,
-                "rvdir=newer",
-                "rvlimit=max",
-                "rvprop=timestamp|userid|user|ids"];
-            var url = wikiEndpoint + "?" + parameters.join("&");
-            console.log("url: " + url);
-            var options = {
-                url: url,
-                Accept: 'application/json',
-                'Accept-Charset': 'utf-8'
-            };
+            // When the difference is one day, the difference number should be more than 86400000
+            if((user_query_date-latest_revision_date)>86400000){
+                console.log("In showUpdateResult, user_query_date is bigger than latest_revision_date for one day, the database should be updated");
+                // Have the request to MediaWikiApi
+                var wikiEndpoint = "https://en.wikipedia.org/w/api.php";
+                // "rvstart=2016-11-01T11:56:22Z",
+                parameters = [
+                    "action=query",
+                    "format=json",
+                    "prop=revisions",
+                    "titles=australia",
+                    "rvstart=" + latestRevisionTimestamp,
+                    "rvdir=newer",
+                    "rvlimit=max",
+                    "rvprop=timestamp|userid|user|ids"];
+                var url = wikiEndpoint + "?" + parameters.join("&");
+                console.log("url: " + url);
+                var options = {
+                    url: url,
+                    Accept: 'application/json',
+                    'Accept-Charset': 'utf-8'
+                };
 
-            var back_client_message = "no mes because of callback";
+                var back_client_message = "no mes because of callback";
 
-            request(options, function (err, resRE, data){
-                if (err) {
-                    console.log('Error:', err);
-                } else if (resRE.statusCode !== 200) {
-                    console.log('Status:', resRE.statusCode);
-                } else {
-                    json = JSON.parse(data);
-                    pages = json.query.pages;
-                    revisions = pages[Object.keys(pages)[0]].revisions;
-                    console.log("There are " + revisions.length + " revisions.");
+                request(options, function (err, resRE, data){
+                    if (err) {
+                        console.log('Error:', err);
+                    } else if (resRE.statusCode !== 200) {
+                        console.log('Status:', resRE.statusCode);
+                    } else {
+                        json = JSON.parse(data);
+                        pages = json.query.pages;
+                        revisions = pages[Object.keys(pages)[0]].revisions;
+                        console.log("There are " + revisions.length + " revisions.");
+                        console.log("The first one got is:  " + revisions[0]);
 
-                    // TODO: Update the database
+                        // TODO: Update the database
+                        // Prepare the data that need to be transmitted to mongoose
+                        console.log(title);
+                        var db_update_data = [];
+                        for(var i=0; i<revisions.length; i++){
+                            var revisions_with_title = revisions[i];
+                            revisions_with_title["title"] = title;
+                            db_update_data.push(revisions_with_title);
+                        }
+                        console.log("db_update_data's title is: " + db_update_data[0].title);
 
-                    back_client_message = "<p>This is the back client message: There are " + revisions.length + " revisions.</p>";
-                    res.send(back_client_message);
-                }
-            });
+                        back_client_message = "<p>This is the back client message: There are " + revisions.length + " revisions.</p>";
+                        res.send(back_client_message);
+                    }
+                });
+            }else{
+                console.log("In showUpdateResult, user_query_date is smaller than latest_revision_date for one day, the database do not need to be updated");
+                back_client_message = "<p>This is the back client message: There is no need to update the database.</p>";
+                res.send(back_client_message);
+            }
+
+
         }
     });
 };
