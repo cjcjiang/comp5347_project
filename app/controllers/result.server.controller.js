@@ -112,20 +112,20 @@ module.exports.showArticleShortestHistory = function(req,res){
 };
 
 // Individual task 1: title
-module.exports.showIndivTitle = function(req,res){
-    var title = req.query.title;
-    console.log("we are in showIndivTitle");
-    Revision.findIndivTitle(title, function(err,result){
-        if (err){
-            console.log("findIndivTitle wrong");
-        }else{
-            console.log(result);
-            console.log("we have the result of findIndivTitle");
-            var data = result[0];
-            res.json(data);
-        }
-    });
-};
+// module.exports.showIndivTitle = function(req,res){
+//     var title = req.query.title;
+//     console.log("we are in showIndivTitle");
+//     Revision.findIndivTitle(title, function(err,result){
+//         if (err){
+//             console.log("findIndivTitle wrong");
+//         }else{
+//             console.log(result);
+//             console.log("we have the result of findIndivTitle");
+//             var data = result[0];
+//             res.json(data);
+//         }
+//     });
+// };
 
 // Individual task 2: The total number of revisions for selected article
 module.exports.showNumOfRevForSpecificTitle = function(req,res){
@@ -153,8 +153,7 @@ module.exports.showIndivTopFive = function(req,res){
         }else{
             console.log(result);
             console.log("we have the result of findIndivTopFive");
-            var data = result[0];
-            res.json(data);
+            res.json(result);
         }
     });
 };
@@ -479,4 +478,11 @@ module.exports.showOverallBarChartPage = function(req,res) {
 module.exports.showOverallPieChartPage = function(req,res) {
     res.render("OverallPieChartPage.ejs");
     console.log("Show the OverallPieChartPage page");
+};
+
+// Show IndiTablePage.ejs
+module.exports.showIndiTablePage = function(req,res) {
+    var revision = req.body.top_five_user;
+    res.render("IndiTablePage.ejs", {top_five_user: revision});
+    console.log("Show the showIndiTablePage page");
 };

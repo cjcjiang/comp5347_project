@@ -164,12 +164,12 @@ RevisionSchema.statics.dataForOverallPieChartBotUser = function(bot, callback){
 };
 
 // Individual task 1: Title
-RevisionSchema.statics.findIndivTitle = function(title, callback){
-    return this.aggregate([
-        {$match:{title:title}}
-    ])
-        .exec(callback);
-};
+// RevisionSchema.statics.findIndivTitle = function(title, callback){
+//     return this.aggregate([
+//         {$match:{title:title}}
+//     ])
+//         .exec(callback);
+// };
 
 // Individual task 2: The total number of revisions for selected article
 RevisionSchema.statics.findNumOfRev = function(title, callback){
@@ -186,7 +186,7 @@ RevisionSchema.statics.findNumOfRev = function(title, callback){
 RevisionSchema.statics.findIndivTopFive = function(title, callback){
     return this.aggregate([
         {$match: {$and:[{"anon":{"$exists":false}}, {"user":{"$nin":["5 albert square"]}}, {"user":{"$nin":["User"]}}]}},
-        {$match: {title:"Michael Jackson"}},
+        {$match: {title:title}},
         {$group: {_id: "$user", NumOfRev: {$sum:5}}},
         {$sort: {NumOfRev: -1}},
         {$limit:5}

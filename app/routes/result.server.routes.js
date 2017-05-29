@@ -19,7 +19,7 @@ router.get('/showArticleLongestHistory', controller.showArticleLongestHistory);
 // Overall task 6: The article with the shortest history
 router.get('/showArticleShortestHistory', controller.showArticleShortestHistory);
 // Individual task 1: Title
-router.get('/showIndivTitle', controller.showIndivTitle);
+// router.get('/showIndivTitle', controller.showIndivTitle);
 // Individual task 2: The total number of revisions for selected article
 router.get('/showNumOfRevForSpecificTitle', controller.showNumOfRevForSpecificTitle);
 // Individual task 3: Top 5 regular users ranked by total revision numbers
@@ -55,6 +55,8 @@ router.post("/showIndividualResult", controller.showIndividualResult);
 
 router.get('/showOverallBarChartPage', controller.showOverallBarChartPage);
 router.get('/showOverallPieChartPage', controller.showOverallPieChartPage);
+
+router.post("/showIndiTablePage", controller.showIndiTablePage);
 
 
 module.exports = router;

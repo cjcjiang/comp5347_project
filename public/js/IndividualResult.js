@@ -9,4 +9,10 @@ $(document).ready(function(){
         console.log(revision.numOfRev);
         $("#individual_result").html("The number of revisions of this title is " + revision.numOfRev);
     });
+
+    $.getJSON("/showIndivTopFive",parameters, function(revision) {
+        var parameters_top_five = {top_five_user: revision};
+        $("#top_five_table").load("/showIndiTablePage", parameters_top_five);
+    });
+
 });
