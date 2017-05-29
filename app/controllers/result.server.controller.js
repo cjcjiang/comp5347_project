@@ -174,7 +174,7 @@ module.exports.showDataForOverallBarChartAnonUser = function(req,res){
 module.exports.showDataForOverallBarChartAdminUser = function(req,res){
     console.log("we are in showDataForOverallBarChartAdminUser");
     admin = req.app.locals.admin;
-    Revision.dataForOverallBarChartAnonUser(admin, function(err,result){
+    Revision.dataForOverallBarChartAdminUser(admin, function(err,result){
         if (err){
             console.log("dataForOverallBarChartAdminUser wrong");
         }else{
