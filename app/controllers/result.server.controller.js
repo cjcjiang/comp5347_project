@@ -317,27 +317,37 @@ module.exports.showUpdateResult = function(req,res){
                         console.log("There are " + revisions.length + " revisions.");
                         console.log("The first one got is:  " + revisions[0]);
 
-                        // TODO: Update the database
-                        // Prepare the data that need to be transmitted to mongoose
-                        console.log(title);
-                        var db_update_data = [];
-                        for(var i=0; i<revisions.length; i++){
-                            var revisions_with_title = revisions[i];
-                            revisions_with_title["title"] = title;
-                            db_update_data.push(revisions_with_title);
-                        }
-                        console.log("db_update_data's title is: " + db_update_data[0].title);
-
-                        Revision.collection.insert(db_update_data, function(err,docs){
-                            if(err){
-                                console.log("insert error");
-                            }else{
-                                back_client_message = "<p>This is the back client message: There are " + revisions.length + " revisions added into the database.</p>";
-                                res.send(back_client_message);
+                        // Check if the timestamp of the latest revision is bigger than the last one in db
+                        var revisions_len = revisions.length;
+                        var revision_last = revisions[revisions_len-1];
+                        var revision_last_timestamp = revision_last.timestamp;
+                        console.log("The last got revision's timestamp is: " + revision_last_timestamp);
+                        // var latest_revision_date = Date.parse(latestRevisionTimestamp);
+                        var revision_last_timestamp_date = Date.parse(revision_last_timestamp);
+                        if((revision_last_timestamp_date-latest_revision_date)>0){
+                            // Prepare the data that need to be transmitted to mongoose
+                            console.log(title);
+                            var db_update_data = [];
+                            for(var i=0; i<revisions.length; i++){
+                                var revisions_with_title = revisions[i];
+                                revisions_with_title["title"] = title;
+                                db_update_data.push(revisions_with_title);
                             }
-                        });
+                            console.log("db_update_data's title is: " + db_update_data[0].title);
 
-
+                            Revision.collection.insert(db_update_data, function(err,docs){
+                                if(err){
+                                    console.log("insert error");
+                                }else{
+                                    back_client_message = "<p>This is the back client message: There are " + revisions.length + " revisions added into the database.</p>";
+                                    res.send(back_client_message);
+                                }
+                            });
+                        }else{
+                            // If the revision_last_timestamp_date and latest_revision_date is the same
+                            back_client_message = "<p>This is the back client message: revision_last_timestamp_date and latest_revision_date is the same, the database will not be updated</p>";
+                            res.send(back_client_message);
+                        }
                     }
                 });
             }else{
