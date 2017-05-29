@@ -493,3 +493,17 @@ module.exports.showIndividualBarChartPage = function(req,res) {
     res.render("IndividualBarChartPage.ejs");
     console.log("Show the IndividualBarChartPage page");
 };
+
+// Show IndividualBarChartPage.ejs
+module.exports.showDropDownListPage = function(req,res) {
+    Revision.dataForDropDownList(function(err,result){
+        if (err){
+            console.log("dataForDropDownList wrong");
+        }else {
+            console.log("The first one of dataForDropDownList is: " + result);
+            console.log("we have the result of dataForDropDownList");
+            res.render("DropDownListPage.ejs", {drop_down_list_data_array: result});
+            console.log("Show the DropDownListPage page");
+        }
+    });
+};

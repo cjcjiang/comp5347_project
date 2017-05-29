@@ -238,6 +238,16 @@ RevisionSchema.statics.dataForIndivBarChartBotUser = function(title, bot, callba
         .exec(callback);
 };
 
+// To provide the drop down list, get all the titles and num of rev
+// [{_id, numOfRev},...]
+RevisionSchema.statics.dataForDropDownList = function(callback){
+    return this.aggregate([
+        {$group:{_id: "$title", numOfRev: {$sum:1}}},
+        {$sort:{numOfRev:-1}},
+    ])
+        .exec(callback);
+};
+
 
 
 var Revision = mongoose.model('Revision', RevisionSchema, 'revisions');

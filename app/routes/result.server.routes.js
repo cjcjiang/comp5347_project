@@ -61,5 +61,8 @@ router.post("/showIndiTablePage", controller.showIndiTablePage);
 // Show individual bar chart page
 router.post("/showIndividualBarChartPage", controller.showIndividualBarChartPage);
 
+// Show the drop down list page
+router.get('/showDropDownListPage', controller.showDropDownListPage);
+
 
 module.exports = router;
