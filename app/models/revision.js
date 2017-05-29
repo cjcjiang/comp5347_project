@@ -282,6 +282,18 @@ RevisionSchema.statics.dataForIndivPieChartBotUser = function(title, bot, callba
         .exec(callback);
 };
 
+// Individual chart 1 (Bar chart) Selected User
+// _id, numOfRev
+RevisionSchema.statics.dataForIndivChartSelectedUser = function(title, users, callback){
+    return this.aggregate([
+        {$match: {"user":{"$in":users}}},
+        {$match: {title:title}},
+        {$group:{_id:{$substr: ["$timestamp", 0, 4]}, numOfRev: {$sum:1}}},
+        {$sort:{"_id":1}}
+    ])
+        .exec(callback);
+};
+
 
 
 

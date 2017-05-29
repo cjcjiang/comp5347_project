@@ -11,6 +11,7 @@ var result = require('./app/routes/result.server.routes.js');
 var fs = require('fs');
 var app = express();
 
+// read as array
 fs.readFile("bot.txt", function(error, data){
     if(error){
         console.log("Read bot.txt error")
@@ -24,6 +25,7 @@ fs.readFile("bot.txt", function(error, data){
     }
 });
 
+// read as array
 fs.readFile("admin.txt", function(error, data){
     if(error){
         console.log("Read bot.txt error")
