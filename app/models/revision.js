@@ -288,7 +288,7 @@ RevisionSchema.statics.dataForIndivChartSelectedUser = function(title, users, ca
     return this.aggregate([
         {$match: {"user":{"$in":users}}},
         {$match: {title:title}},
-        {$group:{_id:{$substr: ["$timestamp", 0, 4]}, numOfRev: {$sum:1}}},
+        {$group:{_id:{time:{$substr: ["$timestamp", 0, 4]},user: "$user"}, numOfRev: {$sum:1}}},
         {$sort:{"_id":1}}
     ])
         .exec(callback);

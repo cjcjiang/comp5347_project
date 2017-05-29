@@ -433,7 +433,7 @@ module.exports.showDataForIndivPieChartBotUser = function(req,res){
 // _id, numOfRev
 module.exports.showDataForIndivChartSelectedUser = function(req,res){
     console.log("we are in showDataForIndivPieChartSelectedUser");
-    var users  = req.app.locals.users;
+    var users  = req.query.selected_user;
     var title = req.query.title;
     Revision.dataForIndivChartSelectedUser(title, users, function(err,result){
         if (err){
@@ -441,7 +441,11 @@ module.exports.showDataForIndivChartSelectedUser = function(req,res){
         }else {
             console.log(result);
             console.log("we have the result of DataForIndivChartSelectedUser");
-            res.json(result);
+            var back_data = {
+                users : users,
+                result : result
+            };
+            res.json(back_data);
         }
     });
 };
