@@ -11,29 +11,13 @@ var result = require('./app/routes/result.server.routes.js');
 var fs = require('fs');
 var app = express();
 
-fs.readFile("bot.txt", function(error, data){
-    if(error){
-        console.log("Read bot.txt error")
-    }
-    else {
-        var bot_array = data.toString().split("\n");
-        app.locals.bot = bot_array;
-        console.log("Read bot.txt success");
-        // Get the first name of the bot to test if the file load is correct
-        console.log("Read bot.txt success");
-    }
-});
+var admin_raw_data = fs.readFileSync("admin.txt");
+var admin_data = admin_raw_data.toString().split(/[\n\r]/);
+app.locals.admin = admin_data;
 
-fs.readFile("admin.txt", function(error, data){
-    if(error){
-        console.log("Read bot.txt error")
-    }
-    else {
-        app.locals.admin = data.toString().split("\n");
-        // Get the first name of the admin to test if the file load is correct
-        console.log("Read admin.txt success");
-    }
-});
+var bot_raw_data = fs.readFileSync("bot.txt");
+var bot_data = bot_raw_data.toString().split(/[\n\r]/);
+app.locals.bot = bot_data;
 
 // Set the path that contains the views to ./app/views
 app.set('views', path.join(__dirname,'app','views'));
