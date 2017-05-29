@@ -75,17 +75,6 @@ RevisionSchema.statics.findArticleShortestHistory = function(callback){
         .exec(callback);
 };
 
-// Individual task 2: The total number of revisions for selected article
-RevisionSchema.statics.findNumOfRev = function(title, callback){
-    return this.aggregate(
-        [
-            {$match:{title:title}},
-            {$group:{_id:"$title", numOfRev: {$sum:1}}}
-
-        ])
-        .exec(callback);
-};
-
 //  for Jiang's request: find latest revision timestamp for selected article
 RevisionSchema.statics.findLatestRevTimestamp = function(title, callback){
     return this.aggregate(
@@ -173,6 +162,83 @@ RevisionSchema.statics.dataForOverallPieChartBotUser = function(bot, callback){
     ])
         .exec(callback);
 };
+
+// Individual task 1: Title
+RevisionSchema.statics.findIndivTitle = function(title, callback){
+    return this.aggregate([
+        {$match:{title:title}}
+    ])
+        .exec(callback);
+};
+
+// Individual task 2: The total number of revisions for selected article
+RevisionSchema.statics.findNumOfRev = function(title, callback){
+    return this.aggregate(
+        [
+            {$match:{title:title}},
+            {$group:{_id:"$title", numOfRev: {$sum:1}}}
+
+        ])
+        .exec(callback);
+};
+
+// Individual task 3: Top 5 regular users ranked by total revision numbers
+RevisionSchema.statics.findIndivTopFive = function(title, callback){
+    return this.aggregate([
+        {$match: {$and:[{"anon":{"$exists":false}}, {"user":{"$nin":["5 albert square"]}}, {"user":{"$nin":["User"]}}]}},
+        {$match: {title:"Michael Jackson"}},
+        {$group: {_id: "$user", NumOfRev: {$sum:5}}},
+        {$sort: {NumOfRev: -1}},
+        {$limit:5}
+    ])
+        .exec(callback);
+};
+
+// Individual chart 1 (bar chart) RegUser
+RevisionSchema.statics.dataForIndivBarChartRegUser = function(title, admin, bot, callback){
+    return this.aggregate([
+        {$match: {$and:[{"anon":{"$exists":false}}, {"user":{"$nin":admin}}, {"user":{"$nin":bot}}]}},
+        {$match: {title:title}},
+        {$group:{_id:{$substr: ["$timestamp", 0, 4]}, numOfRev: {$sum:1}}},
+        {$sort:{"_id":1}}
+    ])
+        .exec(callback);
+};
+
+// Individual chart 1 (bar chart) Admin
+RevisionSchema.statics.dataForIndivBarChartAdminUser = function(title, admin, callback){
+    return this.aggregate([
+        {$match: {"user":{"$in":admin}}},
+        {$match: {title:title}},
+        {$group:{_id:{$substr: ["$timestamp", 0, 4]}, numOfRev: {$sum:1}}},
+        {$sort:{"_id":1}}
+    ])
+        .exec(callback);
+};
+
+// Individual chart 1 (bar chart) Anonymous User
+RevisionSchema.statics.dataForIndivBarChartAnonUser = function(title, callback){
+    return this.aggregate([
+        {$match: {"anon":{"$exists":true}}},
+        {$match: {title:title}},
+        {$group:{_id:{$substr: ["$timestamp", 0, 4]}, numOfRev: {$sum:1}}},
+        {$sort:{"_id":1}}
+    ])
+        .exec(callback);
+};
+
+// Individual chart 1 (bar chart) Bot User
+RevisionSchema.statics.dataForIndivBarChartBotUser = function(title, bot, callback){
+    return this.aggregate([
+        {$match: {"user":{"$in":bot}}},
+        {$match: {title:title}},
+        {$group:{_id:{$substr: ["$timestamp", 0, 4]}, numOfRev: {$sum:1}}},
+        {$sort:{"_id":1}}
+    ])
+        .exec(callback);
+};
+
+
 
 var Revision = mongoose.model('Revision', RevisionSchema, 'revisions');
 

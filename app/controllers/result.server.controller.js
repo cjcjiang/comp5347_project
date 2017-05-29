@@ -111,6 +111,22 @@ module.exports.showArticleShortestHistory = function(req,res){
     });
 };
 
+// Individual task 1: title
+module.exports.showIndivTitle = function(req,res){
+    var title = req.query.title;
+    console.log("we are in showIndivTitle");
+    Revision.findIndivTitle(title, function(err,result){
+        if (err){
+            console.log("findIndivTitle wrong");
+        }else{
+            console.log(result);
+            console.log("we have the result of findIndivTitle");
+            var data = result[0];
+            res.json(data);
+        }
+    });
+};
+
 // Individual task 2: The total number of revisions for selected article
 module.exports.showNumOfRevForSpecificTitle = function(req,res){
     var title = req.query.title;
@@ -126,6 +142,23 @@ module.exports.showNumOfRevForSpecificTitle = function(req,res){
         }
     });
 };
+
+// Individual task 3: Top 5 regular users ranked by total revision numbers
+module.exports.showIndivTopFive = function(req,res){
+    var title = req.query.title;
+    console.log("we are in showIndivTopFive");
+    Revision.findIndivTopFive(title, function(err,result){
+        if (err){
+            console.log("findIndivTopFive wrong");
+        }else{
+            console.log(result);
+            console.log("we have the result of findIndivTopFive");
+            var data = result[0];
+            res.json(data);
+        }
+    });
+};
+
 
 module.exports.showUpdateResultPage = function(req,res){
     console.log("we are in showUpdateResultPage");
@@ -259,6 +292,73 @@ module.exports.showDataForOverallPieChartBotUser = function(req,res){
         }
     });
 };
+
+// Individual chart 1 (bar chart) Registered User
+module.exports.showDataForIndivBarChartRegUser = function(req,res){
+    console.log("we are in showDataForIndivBarChartRegUser");
+    var bot  = req.app.locals.bot;
+    var admin  = req.app.locals.admin;
+    var title = req.query.title;
+    Revision.dataForIndivBarChartRegUser(title, bot, admin, function(err,result){
+        if (err){
+            console.log("DataForIndivBarChartRegUser wrong");
+        }else {
+            console.log(result);
+            console.log("we have the result of DataForIndivBarChartRegUser");
+            res.json(result);
+        }
+    });
+};
+
+// Individual chart 1 (bar chart) Admin User
+module.exports.showDataForIndivBarChartAdminUser = function(req,res){
+    console.log("we are in showDataForIndivBarChartAdminUser");
+    var admin  = req.app.locals.admin;
+    var title = req.query.title;
+    Revision.dataForIndivBarChartAdminUser(title, admin, function(err,result){
+        if (err){
+            console.log("DataForIndivBarChartAdminUser wrong");
+        }else {
+            console.log(result);
+            console.log("we have the result of DataForIndivBarChartAdminUser");
+            res.json(result);
+        }
+    });
+};
+
+// Individual chart 1 (bar chart) Anonymous User
+module.exports.showDataForIndivBarChartAnonUser = function(req,res){
+    console.log("we are in showDataForIndivBarChartAnonUser");
+    var title = req.query.title;
+    Revision.dataForIndivBarChartAnonUser(title, function(err,result){
+        if (err){
+            console.log("DataForIndivBarChartAnonUser wrong");
+        }else {
+            console.log(result);
+            console.log("we have the result of DataForIndivBarChartAnonUser");
+            res.json(result);
+        }
+    });
+};
+
+// Individual chart 1 (bar chart) Bot User
+module.exports.showDataForIndivBarChartBotUser = function(req,res){
+    console.log("we are in showDataForIndivBarChartBotUser");
+    var bot  = req.app.locals.bot;
+    var title = req.query.title;
+    Revision.dataForIndivBarChartBotUser(title, bot, function(err,result){
+        if (err){
+            console.log("DataForIndivBarChartBotUser wrong");
+        }else {
+            console.log(result);
+            console.log("we have the result of DataForIndivBarChartBotUser");
+            res.json(result);
+        }
+    });
+};
+
+
+
 
 
 //  for Jiang's request: find latest revision timestamp for selected article

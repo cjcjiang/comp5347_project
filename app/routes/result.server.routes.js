@@ -18,9 +18,12 @@ router.get('/showArticleSmallestRegUser', controller.showArticleSmallestRegUser)
 router.get('/showArticleLongestHistory', controller.showArticleLongestHistory);
 // Overall task 6: The article with the shortest history
 router.get('/showArticleShortestHistory', controller.showArticleShortestHistory);
-
-// Individual task 2
+// Individual task 1: Title
+router.get('/showIndivTitle', controller.showIndivTitle);
+// Individual task 2: The total number of revisions for selected article
 router.get('/showNumOfRevForSpecificTitle', controller.showNumOfRevForSpecificTitle);
+// Individual task 3: Top 5 regular users ranked by total revision numbers
+router.get('/showIndivTopFive', controller.showIndivTopFive);
 // Overall chart 1 (bar chart) Registered User
 router.get('/showDataForOverallBarChartRegUser', controller.showDataForOverallBarChartRegUser);
 // Overall chart 1 (bar chart) Anonymous
@@ -37,6 +40,14 @@ router.get('/showDataForOverallPieChartAnonUser', controller.showDataForOverallP
 router.get('/showDataForOverallPieChartAdminUser', controller.showDataForOverallPieChartAdminUser);
 // Overall chart 2 (pie chart) Bot
 router.get('/showDataForOverallPieChartBotUser', controller.showDataForOverallPieChartBotUser);
+// Individual chart 1 (bar chart) Registered User
+router.get('/showDataForIndivBarChartRegUser', controller.showDataForIndivBarChartRegUser);
+// Individual chart 1 (bar chart) Admin User
+router.get('/showDataForIndivBarChartAdminUser', controller.showDataForIndivBarChartAdminUser);
+// Individual chart 1 (bar chart) Anonymous User
+router.get('/showDataForIndivBarChartAnonUser', controller.showDataForIndivBarChartAnonUser);
+// Individual chart 1 (bar chart) Bot User
+router.get('/showDataForIndivBarChartBotUser', controller.showDataForIndivBarChartBotUser);
 
 router.post('/showUpdateResultPage', controller.showUpdateResultPage);
 router.get('/showUpdateResult', controller.showUpdateResult);
