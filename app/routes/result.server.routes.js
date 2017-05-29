@@ -48,6 +48,14 @@ router.get('/showDataForIndivBarChartAdminUser', controller.showDataForIndivBarC
 router.get('/showDataForIndivBarChartAnonUser', controller.showDataForIndivBarChartAnonUser);
 // Individual chart 1 (bar chart) Bot User
 router.get('/showDataForIndivBarChartBotUser', controller.showDataForIndivBarChartBotUser);
+// Individual chart 1 (pie chart) Registered User
+router.get('/showDataForIndivPieChartRegUser', controller.showDataForIndivPieChartRegUser);
+// Individual chart 1 (bar chart) Admin User
+router.get('/showDataForIndivPieChartAdminUser', controller.showDataForIndivPieChartAdminUser);
+// Individual chart 1 (bar chart) Anonymous User
+router.get('/showDataForIndivPieChartAnonUser', controller.showDataForIndivPieChartAnonUser);
+// Individual chart 1 (bar chart) Bot User
+router.get('/showDataForIndivPieChartBotUser', controller.showDataForIndivPieChartBotUser);
 
 router.post('/showUpdateResultPage', controller.showUpdateResultPage);
 router.get('/showUpdateResult', controller.showUpdateResult);
