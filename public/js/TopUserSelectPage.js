@@ -3,9 +3,10 @@ function drawChart(temp_chart_data) {
 
     var options = {
         chart: {
-            title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-        }
+            title: 'Revision distribution by year of top 5 users',
+        },
+        hAxis: {format: 'decimal'},
+        vAxis: {format: 'decimal'}
     };
 
     var chart = new google.charts.Bar(document.getElementById('indi_chart_result'));

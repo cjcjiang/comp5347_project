@@ -1,6 +1,6 @@
 // Individual Bar Chart one draw function
 function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year, admin_user_num_rev, bot_user_first_year, bot_user_num_rev, anon_user_first_year, anon_user_num_rev) {
-    var data_temp = [['Year', 'admin', 'anon', 'bot', 'reg_user']];
+    var data_temp = [['Year', 'Administrator', 'Anonymous', 'Bot', 'Regular user']];
 
     console.log("reg_user_num_rev is: " + reg_user_num_rev);
     var admin_user_num_rev_len = admin_user_num_rev.length;
@@ -62,7 +62,9 @@ function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year,
     var options = {
         chart: {
             title: 'Revision distribution by year and by user type for article' // 加传进来的title名字
-        }
+        },
+        hAxis: {format: 'decimal'},
+        vAxis: {format: 'decimal'}
     };
     var chart = new google.charts.Bar(document.getElementById('chart_result_page'));
     chart.draw(data, google.charts.Bar.convertOptions(options));

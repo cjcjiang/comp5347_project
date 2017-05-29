@@ -32,6 +32,8 @@ $(document).ready(function(){
         $("#showArticleShortestHistory").html("The article with the shortest history: " + revision.title);
     });
 
+    $("#chart_result").load("/showOverallBarChartPage");
+
     $("#bar_chart").click(function(event){
         event.preventDefault();
         $("#chart_result").load("/showOverallBarChartPage");

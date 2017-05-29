@@ -1,6 +1,6 @@
 // Overall Bar Chart one draw function
 function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year, admin_user_num_rev, bot_user_first_year, bot_user_num_rev, anon_user_first_year, anon_user_num_rev) {
-    var data_temp = [['Year', 'admin', 'anon', 'bot', 'reg_user']];
+    var data_temp = [['Year', 'Administrator', 'Anonymous', 'Bot', 'Regular user']];
 
     console.log("reg_user_num_rev is: " + reg_user_num_rev);
     var admin_user_num_rev_len = admin_user_num_rev.length;
@@ -12,6 +12,7 @@ function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year,
     var max_len = Math.max.apply(Math, num_len_array);
     var start_year = 1000;
 
+    // Make the smallest year as the start year
     if(max_len==admin_user_num_rev_len){start_year = admin_user_first_year;}
     if(max_len==anon_user_num_rev_len){start_year = anon_user_first_year;}
     if(max_len==bot_user_num_rev_len){start_year = bot_user_first_year;}
@@ -25,6 +26,8 @@ function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year,
         var bot_num_of_rev;
         var reg_num_of_rev;
 
+        // If admin starts this year, push numOfRev into the chart data array
+        // If not, push 0 to the chart data array
         if(admin_user_first_year<=year){
             var index = year-admin_user_first_year;
             if(index<admin_user_num_rev_len){
@@ -61,8 +64,10 @@ function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year,
 
     var options = {
         chart: {
-            title: 'Revision distribution by year and by user type for article Germany'
-        }
+            title: 'Revision distribution by year and by user type'
+        },
+        hAxis: {format: 'decimal'},
+        vAxis: {format: 'decimal'}
     };
     var chart = new google.charts.Bar(document.getElementById('chart_result_page'));
     chart.draw(data, google.charts.Bar.convertOptions(options));

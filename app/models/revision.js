@@ -187,7 +187,7 @@ RevisionSchema.statics.findIndivTopFive = function(title, callback){
     return this.aggregate([
         {$match: {$and:[{"anon":{"$exists":false}}, {"user":{"$nin":["5 albert square"]}}, {"user":{"$nin":["User"]}}]}},
         {$match: {title:title}},
-        {$group: {_id: "$user", NumOfRev: {$sum:5}}},
+        {$group: {_id: "$user", NumOfRev: {$sum:1}}},
         {$sort: {NumOfRev: -1}},
         {$limit:5}
     ])

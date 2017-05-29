@@ -3,7 +3,7 @@ function drawChart(reg_user_num_rev, admin_user_num_rev, bot_user_num_rev, anon_
     var data_temp = [
         ['Users', 'num_of_rev'],
         ['Administrator', admin_user_num_rev],
-        ['Anon', anon_user_num_rev],
+        ['Anonymous', anon_user_num_rev],
         ['Bot', bot_user_num_rev],
         ['Regular user', reg_user_num_rev]
     ];

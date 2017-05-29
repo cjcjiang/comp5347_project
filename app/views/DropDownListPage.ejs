@@ -9,7 +9,7 @@
 
 <select id="query_title">
     <% for(var i=0;i<drop_down_list_data_array.length;i++) {%>
-    <option value=<%=drop_down_list_data_array[i]._id%>><%=drop_down_list_data_array[i]._id + "\t:\tNumOfRev "%><%=drop_down_list_data_array[i].numOfRev%></option>
+    <option value=<%=drop_down_list_data_array[i]._id%>><%=drop_down_list_data_array[i]._id + "\t:\t"%><%=drop_down_list_data_array[i].numOfRev%></option>
     <% } %>
 </select>
 
