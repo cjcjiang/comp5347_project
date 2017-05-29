@@ -16,12 +16,10 @@ fs.readFile("bot.txt", function(error, data){
         console.log("Read bot.txt error")
     }
     else {
-        app.locals.bot = data.toString().split("\n");
+        var bot_array = data.toString().split("\n");
+        app.locals.bot = bot_array;
         console.log("Read bot.txt success");
         // Get the first name of the bot to test if the file load is correct
-        var bot_array = app.locals.bot;
-        var bot_test = bot_array[0];
-        console.log("The first bot is: " + bot_test);
         console.log("Read bot.txt success");
     }
 });
@@ -33,9 +31,6 @@ fs.readFile("admin.txt", function(error, data){
     else {
         app.locals.admin = data.toString().split("\n");
         // Get the first name of the admin to test if the file load is correct
-        var admin_array = app.locals.admin;
-        var admin_test = admin_array[0];
-        console.log("The first admin is: " + admin_test);
         console.log("Read admin.txt success");
     }
 });
