@@ -71,22 +71,23 @@ google.charts.load('current', {'packages':['bar']});
 
 $(document).ready(function(){
     // Have Reg User bar chart data
-    $.getJSON('/showDataForIndivBarChartRegUser',null, function(reg_revision) {
+    var title = $("#user_query_title").text();
+    $.getJSON('/showDataForIndivBarChartRegUser',title, function(reg_revision) {
         var reg_user_num_rev = reg_revision;
         var reg_user_first_year = reg_user_num_rev[0]._id.year;
         console.log("reg_user_first_year is: " + reg_user_first_year);
         console.log("IndivBarChartRegUser length is: " + reg_user_num_rev.length);
 
         // Have admin user bar chart data
-        $.getJSON('/showDataForIndivBarChartAdminUser',null, function(admin_revision){
+        $.getJSON('/showDataForIndivBarChartAdminUser',title, function(admin_revision){
             var admin_user_num_rev = admin_revision;
             var admin_user_first_year = admin_user_num_rev[0]._id.year;
             // Have bot user bar chart data
-            $.getJSON('/showDataForIndivBarChartBotUser',null, function(bot_revision){
+            $.getJSON('/showDataForIndivBarChartBotUser',title, function(bot_revision){
                 var bot_user_num_rev = bot_revision;
                 var bot_user_first_year = bot_user_num_rev[0]._id.year;
                 // Have anon uses bar chart data
-                $.getJSON('/showDataForIndivBarChartAnonUser',null, function(anon_revision){
+                $.getJSON('/showDataForIndivBarChartAnonUser',title, function(anon_revision){
                     var anon_user_num_rev = anon_revision;
                     var anon_user_first_year = anon_user_num_rev[0]._id.year;
                     drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year, admin_user_num_rev, bot_user_first_year, bot_user_num_rev, anon_user_first_year, anon_user_num_rev);

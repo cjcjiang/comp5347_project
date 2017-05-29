@@ -61,15 +61,18 @@ router.get('/showDataForIndivChartSelectedUser', controller.showDataForIndivChar
 
 router.post('/showUpdateResultPage', controller.showUpdateResultPage);
 router.get('/showUpdateResult', controller.showUpdateResult);
+
 router.post("/showIndividualResult", controller.showIndividualResult);
-
-router.get('/showOverallBarChartPage', controller.showOverallBarChartPage);
-router.get('/showOverallPieChartPage', controller.showOverallPieChartPage);
-
 router.post("/showIndiTablePage", controller.showIndiTablePage);
 
+// Show overall bar chart page
+router.get('/showOverallBarChartPage', controller.showOverallBarChartPage);
+// Show overall pie chart page
+router.get('/showOverallPieChartPage', controller.showOverallPieChartPage);
 // Show individual bar chart page
 router.post("/showIndividualBarChartPage", controller.showIndividualBarChartPage);
+// Show individual pie chart page
+router.post("/showIndividualPieChartPage", controller.showIndividualPieChartPage);
 
 // Show the drop down list page
 router.get('/showDropDownListPage', controller.showDropDownListPage);

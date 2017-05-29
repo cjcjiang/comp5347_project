@@ -25,20 +25,21 @@ google.charts.load('current', {'packages':['corechart']});
 
 $(document).ready(function(){
     // Have Reg User pie chart data
-    $.getJSON('/showDataForIndivPieChartRegUser',null, function(reg_revision) {
+    var title = $("#user_query_title").text();
+    $.getJSON('/showDataForIndivPieChartRegUser',title, function(reg_revision) {
         var reg_user_num_rev = reg_revision[0].RegUsers;
         console.log("reg_user_num_rev is: " + reg_user_num_rev);
 
         // Have admin user pie chart data
-        $.getJSON('/showDataForIndivPieChartAdminUser',null, function(admin_revision){
+        $.getJSON('/showDataForIndivPieChartAdminUser',title, function(admin_revision){
             var admin_user_num_rev = admin_revision[0].AdminUsers;
 
             // Have bot user pie chart data
-            $.getJSON('/showDataForIndivPieChartBotUser',null, function(bot_revision){
+            $.getJSON('/showDataForIndivPieChartBotUser',title, function(bot_revision){
                 var bot_user_num_rev = bot_revision[0].BotUsers;
 
                 // Have anon uses pie chart data
-                $.getJSON('/showDataForIndivPieChartAnonUser',null, function(anon_revision){
+                $.getJSON('/showDataForIndivPieChartAnonUser',title, function(anon_revision){
                     var anon_user_num_rev = anon_revision[0].AnonUsers;
                     drawChart(reg_user_num_rev, admin_user_num_rev, bot_user_num_rev, anon_user_num_rev);
                 });

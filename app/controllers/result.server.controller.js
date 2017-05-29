@@ -577,11 +577,18 @@ module.exports.showIndiTablePage = function(req,res) {
 // Show IndividualBarChartPage.ejs
 module.exports.showIndividualBarChartPage = function(req,res) {
     var title = req.body.user_query_title;
-    res.render("IndividualBarChartPage.ejs");
+    res.render("IndividualBarChartPage.ejs", {user_query_title: title});
     console.log("Show the IndividualBarChartPage page");
 };
 
 // Show IndividualBarChartPage.ejs
+module.exports.showIndividualPieChartPage = function(req,res) {
+    var title = req.body.user_query_title;
+    res.render("IndividualPieChartPage.ejs", {user_query_title: title});
+    console.log("Show the IndividualPieChartPage page");
+};
+
+// Show DropDownListPage.ejs
 module.exports.showDropDownListPage = function(req,res) {
     Revision.dataForDropDownList(function(err,result){
         if (err){
