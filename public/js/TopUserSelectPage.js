@@ -17,14 +17,37 @@ google.charts.load('current', {'packages':['bar']});
 
 $(document).ready(function(){
     var title = $("#user_query_title").text();
+    var user_array = [];
 
     $("#select_user_button").click(function(event){
         event.preventDefault();
-        var user_array = $("#selected_user").val();
 
-        console.log("User's query user_array is: " + user_array);
-        // var user_array = user_raw.toString().split(",");
-        // console.log("User's query user_array is: " + user_array);
+        if ($('#top_one_user').is(":checked"))
+        {
+            var user = $('#top_one_user_text').text();
+            user_array.push(user);
+        }
+        if ($('#top_two_user').is(":checked"))
+        {
+            var user = $('#top_two_user_text').text();
+            user_array.push(user);
+        }
+        if ($('#top_three_user').is(":checked"))
+        {
+            var user = $('#top_three_user_text').text();
+            user_array.push(user);
+        }
+        if ($('#top_four_user').is(":checked"))
+        {
+            var user = $('#top_four_user_text').text();
+            user_array.push(user);
+        }
+        if ($('#top_five_user').is(":checked"))
+        {
+            var user = $('#top_five_user_text').text();
+            user_array.push(user);
+        }
+        console.log("the user_array is: " + user_array);
 
         // Send user's query title and selected users to the server
         var parameters = {title: title, selected_user: user_array};

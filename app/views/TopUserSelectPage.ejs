@@ -6,16 +6,14 @@
     <script type="text/javascript" src="/js/TopUserSelectPage.js"></script>
 
 </head>
-<body>
+<input>
 <h2>This is TopUserSelect page</h2>
 
-<select multiple id="selected_user">
-    <option value=<%=top_five_user[0]._id%>><%=top_five_user[0]._id%></option>
-    <option value=<%=top_five_user[1]._id%>><%=top_five_user[1]._id%></option>
-    <option value=<%=top_five_user[2]._id%>><%=top_five_user[2]._id%></option>
-    <option value=<%=top_five_user[3]._id%>><%=top_five_user[3]._id%></option>
-    <option value=<%=top_five_user[4]._id%>><%=top_five_user[4]._id%></option>
-</select>
+<div id="top_one_user_text"><input type="checkbox" id="top_one_user"><%=top_five_user[0]._id%></div><br>
+<div id="top_two_user_text"><input type="checkbox" id="top_two_user"><%=top_five_user[1]._id%></div><br>
+<div id="top_three_user_text"><input type="checkbox" id="top_three_user"><%=top_five_user[2]._id%></div><br>
+<div id="top_four_user_text"><input type="checkbox" id="top_four_user"><%=top_five_user[3]._id%></div><br>
+<div id="top_five_user_text"><input type="checkbox" id="top_five_user"><%=top_five_user[4]._id%></div><br>
 
 <button type="button" id="select_user_button">Check the information about this title</button>
 
