@@ -17,5 +17,13 @@ $(document).ready(function(){
 
     $("#indi_chart_result").load("/showIndividualBarChartPage", parameters);
 
+    $("#select_user_chart").click(function(event){
+        event.preventDefault();
+        $.getJSON("/showIndivTopFive",parameters, function(revision) {
+            var parameters_top_five = {top_five_user: revision};
+            $("#indi_chart_result").load("/showTopUserSelectPage", parameters_top_five);
+        });
+    });
+
 
 });

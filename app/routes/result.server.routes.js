@@ -74,5 +74,8 @@ router.post("/showIndividualBarChartPage", controller.showIndividualBarChartPage
 // Show the drop down list page
 router.get('/showDropDownListPage', controller.showDropDownListPage);
 
+// Show individual select top user page
+router.post("/showTopUserSelectPage", controller.showTopUserSelectPage);
+
 
 module.exports = router;

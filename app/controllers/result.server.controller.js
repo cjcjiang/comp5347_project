@@ -594,3 +594,10 @@ module.exports.showDropDownListPage = function(req,res) {
         }
     });
 };
+
+// Show TopUserSelectPage.ejs
+module.exports.showTopUserSelectPage = function(req,res) {
+    var revision = req.body.top_five_user;
+    res.render("TopUserSelectPage.ejs", {top_five_user: revision});
+    console.log("Show the TopUserSelectPage");
+};
