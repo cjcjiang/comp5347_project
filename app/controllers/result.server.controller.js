@@ -233,7 +233,7 @@ module.exports.showDataForOverallPieChartAnonUser = function(req,res){
 // Overall chart 2 (pie chart) Administrator
 module.exports.showDataForOverallPieChartAdminUser = function(req,res){
     console.log("we are in showDataForOverallPieChartAdminUser");
-    admin = req.app.locals.admin;
+    var admin = req.app.locals.admin;
     Revision.dataForOverallPieChartAdminUser(admin, function(err,result){
         if (err){
             console.log("dataForOverallPieChartAdminUser wrong");
@@ -367,4 +367,10 @@ module.exports.showIndividualResult = function(req,res) {
     res.render("IndividualResult.ejs", {user_query_title: title});
     console.log("The title for the IndividualResult page: " + title);
     console.log("Show the IndividualResult page");
+};
+
+// Show OverallBarChartPage.ejs
+module.exports.showOverallBarChartPage = function(req,res) {
+    res.render("OverallBarChartPage.ejs");
+    console.log("Show the OverallBarChartPage page");
 };

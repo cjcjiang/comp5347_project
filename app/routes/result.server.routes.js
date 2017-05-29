@@ -42,5 +42,7 @@ router.post('/showUpdateResultPage', controller.showUpdateResultPage);
 router.get('/showUpdateResult', controller.showUpdateResult);
 router.post("/showIndividualResult", controller.showIndividualResult);
 
+router.get('/showOverallBarChartPage', controller.showOverallBarChartPage);
+
 
 module.exports = router;
