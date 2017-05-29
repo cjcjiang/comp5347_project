@@ -356,7 +356,7 @@ module.exports.showDataForIndivBarChartBotUser = function(req,res){
     });
 };
 
-// Individual chart 1 (Pie chart) Registered User
+// Individual chart 2 (Pie chart) Registered User
 // RegUser
 module.exports.showDataForIndivPieChartRegUser = function(req,res){
     console.log("we are in showDataForIndivPieChartRegUser");
@@ -375,7 +375,7 @@ module.exports.showDataForIndivPieChartRegUser = function(req,res){
     });
 };
 
-// Individual chart 1 (Pie chart) Admin User
+// Individual chart 2 (Pie chart) Admin User
 // AdminUser
 module.exports.showDataForIndivPieChartAdminUser = function(req,res){
     console.log("we are in showDataForIndivPieChartAdminUser");
@@ -393,7 +393,7 @@ module.exports.showDataForIndivPieChartAdminUser = function(req,res){
     });
 };
 
-// Individual chart 1 (Pie chart) Anonymous User
+// Individual chart 2 (Pie chart) Anonymous User
 // AnonUser
 module.exports.showDataForIndivPieChartAnonUser = function(req,res){
     console.log("we are in showDataForIndivPieChartAnonUser");
@@ -410,13 +410,13 @@ module.exports.showDataForIndivPieChartAnonUser = function(req,res){
     });
 };
 
-// Individual chart 1 (Pie chart) Bot User
+// Individual chart 2 (Pie chart) Bot User
 // BotUser
 module.exports.showDataForIndivPieChartBotUser = function(req,res){
     console.log("we are in showDataForIndivPieChartBotUser");
     var bot  = req.app.locals.bot;
     var title = req.query.title;
-    Revision.dataForIndivPieChartAdminUser(title, bot, function(err,result){
+    Revision.dataForIndivPieChartBotUser(title, bot, function(err,result){
         if (err){
             console.log("DataForIndivPieChartBotUser wrong");
         }else {
@@ -428,7 +428,22 @@ module.exports.showDataForIndivPieChartBotUser = function(req,res){
     });
 };
 
-
+// Individual chart 3 (Bar chart) Selected User
+// _id, numOfRev
+module.exports.showDataForIndivChartSelectedUser = function(req,res){
+    console.log("we are in showDataForIndivPieChartSelectedUser");
+    var users  = req.app.locals.users;
+    var title = req.query.title;
+    Revision.dataForIndivChartSelectedUser(title, users, function(err,result){
+        if (err){
+            console.log("DataForIndivChartSelectedUser wrong");
+        }else {
+            console.log(result);
+            console.log("we have the result of DataForIndivChartSelectedUser");
+            res.json(result);
+        }
+    });
+};
 
 
 
