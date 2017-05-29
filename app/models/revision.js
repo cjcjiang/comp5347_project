@@ -238,6 +238,51 @@ RevisionSchema.statics.dataForIndivBarChartBotUser = function(title, bot, callba
         .exec(callback);
 };
 
+// Individual chart 1 (pie chart) RegUser
+// RegUsers
+RevisionSchema.statics.dataForIndivPieChartRegUser = function(title, admin, bot, callback){
+    return this.aggregate([
+        {$match: {$and:[{"anon":{"$exists":false}}, {"user":{"$nin":admin}}, {"user":{"$nin":bot}}]}},
+        {$match: {title:title}},
+        {$count: "RegUsers"}
+    ])
+        .exec(callback);
+};
+
+// Individual chart 1 (pie chart) Admin
+// AdminUsers
+RevisionSchema.statics.dataForIndivPieChartAdminUser = function(title, admin, callback){
+    return this.aggregate([
+        {$match: {"user":{"$in":admin}}},
+        {$match: {title:title}},
+        {$count: "AdminUsers"}
+    ])
+        .exec(callback);
+};
+
+// Individual chart 1 (pie chart) Anonymous User
+// AnonUsers
+RevisionSchema.statics.dataForIndivPieChartAnonUser = function(title, callback){
+    return this.aggregate([
+        {$match: {"anon":{"$exists":true}}},
+        {$match: {title:title}},
+        {$count: "AnonUsers"}
+    ])
+        .exec(callback);
+};
+
+// Individual chart 1 (Pie chart) Bot User
+// BotUsers
+RevisionSchema.statics.dataForIndivPieChartBotUser = function(title, bot, callback){
+    return this.aggregate([
+        {$match: {"user":{"$in":bot}}},
+        {$match: {title:title}},
+        {$count: "BotUsers"}
+    ])
+        .exec(callback);
+};
+
+
 
 
 var Revision = mongoose.model('Revision', RevisionSchema, 'revisions');

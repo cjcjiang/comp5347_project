@@ -357,6 +357,78 @@ module.exports.showDataForIndivBarChartBotUser = function(req,res){
     });
 };
 
+// Individual chart 1 (Pie chart) Registered User
+// RegUser
+module.exports.showDataForIndivPieChartRegUser = function(req,res){
+    console.log("we are in showDataForIndivPieChartRegUser");
+    var bot  = req.app.locals.bot;
+    var admin  = req.app.locals.admin;
+    var title = req.query.title;
+    Revision.dataForIndivPieChartRegUser(title, bot, admin, function(err,result){
+        if (err){
+            console.log("DataForIndivPieChartRegUser wrong");
+        }else {
+            console.log(result);
+            console.log("we have the result of DataForIndivPieChartRegUser");
+            var data = result[0];
+            res.json(data);
+        }
+    });
+};
+
+// Individual chart 1 (Pie chart) Admin User
+// AdminUser
+module.exports.showDataForIndivPieChartAdminUser = function(req,res){
+    console.log("we are in showDataForIndivPieChartAdminUser");
+    var admin  = req.app.locals.admin;
+    var title = req.query.title;
+    Revision.dataForIndivPieChartAdminUser(title, admin, function(err,result){
+        if (err){
+            console.log("DataForIndivPieChartAdminUser wrong");
+        }else {
+            console.log(result);
+            console.log("we have the result of DataForIndivPieChartAdminUser");
+            var data = result[0];
+            res.json(data);
+        }
+    });
+};
+
+// Individual chart 1 (Pie chart) Anonymous User
+// AnonUser
+module.exports.showDataForIndivPieChartAnonUser = function(req,res){
+    console.log("we are in showDataForIndivPieChartAnonUser");
+    var title = req.query.title;
+    Revision.dataForIndivPieChartAnonUser(title, function(err,result){
+        if (err){
+            console.log("DataForIndivPieChartAnonUser wrong");
+        }else {
+            console.log(result);
+            console.log("we have the result of DataForIndivPieChartAnonUser");
+            var data = result[0];
+            res.json(data);
+        }
+    });
+};
+
+// Individual chart 1 (Pie chart) Bot User
+// BotUser
+module.exports.showDataForIndivPieChartBotUser = function(req,res){
+    console.log("we are in showDataForIndivPieChartBotUser");
+    var bot  = req.app.locals.bot;
+    var title = req.query.title;
+    Revision.dataForIndivPieChartAdminUser(title, bot, function(err,result){
+        if (err){
+            console.log("DataForIndivPieChartBotUser wrong");
+        }else {
+            console.log(result);
+            console.log("we have the result of DataForIndivPieChartBotUser");
+            var data = result[0];
+            res.json(data);
+        }
+    });
+};
+
 
 
 
