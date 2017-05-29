@@ -1,9 +1,17 @@
 $(document).ready(function(){
-    $("#result").html("here shows the success of the individual js");
+    // Show the drop down list
+    $("#query_button").hide();
 
-    $("#show").click(function(event){
+    $("#drop_down_list").load("/showDropDownListPage", function(){
+        $("#query_button").show();
+    });
+
+    $("#query_button").click(function(event){
         event.preventDefault();
-        var title = $("#title_text").val();
+        var title_raw = $("#query_title option:selected").text();
+        var title_array = title_raw.split("\t");
+        var title = title_array[0];
+        console.log("User's query title is: " + title);
         var date_now = new Date();
         // Browser can only get the local time
         // Turn it to Greenwich Mean Time(GMT), as the timestamp from MediaWikiAPI is GMT
@@ -13,4 +21,5 @@ $(document).ready(function(){
         var parameters = {title: title, timestamp: date_now_string};
         $("#individual_page").load("/showUpdateResultPage", parameters);
     });
+
 });

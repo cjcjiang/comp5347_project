@@ -238,18 +238,18 @@ RevisionSchema.statics.dataForIndivBarChartBotUser = function(title, bot, callba
         .exec(callback);
 };
 
-// Individual chart 1 (pie chart) RegUser
+// Individual chart 2 (pie chart) RegUser
 // RegUsers
 RevisionSchema.statics.dataForIndivPieChartRegUser = function(title, admin, bot, callback){
     return this.aggregate([
         {$match: {$and:[{"anon":{"$exists":false}}, {"user":{"$nin":admin}}, {"user":{"$nin":bot}}]}},
         {$match: {title:title}},
         {$count: "RegUsers"}
-    ])
+	])
         .exec(callback);
 };
 
-// Individual chart 1 (pie chart) Admin
+// Individual chart 2 (pie chart) Admin
 // AdminUsers
 RevisionSchema.statics.dataForIndivPieChartAdminUser = function(title, admin, callback){
     return this.aggregate([
@@ -260,7 +260,7 @@ RevisionSchema.statics.dataForIndivPieChartAdminUser = function(title, admin, ca
         .exec(callback);
 };
 
-// Individual chart 1 (pie chart) Anonymous User
+// Individual chart 2 (pie chart) Anonymous User
 // AnonUsers
 RevisionSchema.statics.dataForIndivPieChartAnonUser = function(title, callback){
     return this.aggregate([
@@ -271,7 +271,7 @@ RevisionSchema.statics.dataForIndivPieChartAnonUser = function(title, callback){
         .exec(callback);
 };
 
-// Individual chart 1 (Pie chart) Bot User
+// Individual chart 2 (Pie chart) Bot User
 // BotUsers
 RevisionSchema.statics.dataForIndivPieChartBotUser = function(title, bot, callback){
     return this.aggregate([
@@ -282,7 +282,7 @@ RevisionSchema.statics.dataForIndivPieChartBotUser = function(title, bot, callba
         .exec(callback);
 };
 
-// Individual chart 1 (Bar chart) Selected User
+// Individual chart 3 (Bar chart) Selected User
 // _id, numOfRev
 RevisionSchema.statics.dataForIndivChartSelectedUser = function(title, users, callback){
     return this.aggregate([
@@ -294,8 +294,15 @@ RevisionSchema.statics.dataForIndivChartSelectedUser = function(title, users, ca
         .exec(callback);
 };
 
-
-
+// To provide the drop down list, get all the titles and num of rev
+// [{_id, numOfRev},...]
+RevisionSchema.statics.dataForDropDownList = function(callback){
+    return this.aggregate([
+        {$group:{_id: "$title", numOfRev: {$sum:1}}},
+        {$sort:{numOfRev:-1}},
+    ])
+        .exec(callback);
+};
 
 var Revision = mongoose.model('Revision', RevisionSchema, 'revisions');
 

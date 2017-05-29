@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/DropDownListPage.js"></script>
+
+</head>
+<body>
+
+<select id="query_title">
+    <% for(var i=0;i<drop_down_list_data_array.length;i++) {%>
+    <option value=<%=drop_down_list_data_array[i]._id%>><%=drop_down_list_data_array[i]._id + "\t:\tNumOfRev "%><%=drop_down_list_data_array[i].numOfRev%></option>
+    <% } %>
+</select>
+
+</body>
+</html>
