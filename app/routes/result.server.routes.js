@@ -58,5 +58,8 @@ router.get('/showOverallPieChartPage', controller.showOverallPieChartPage);
 
 router.post("/showIndiTablePage", controller.showIndiTablePage);
 
+// Show individual bar chart page
+router.post("/showIndividualBarChartPage", controller.showIndividualBarChartPage);
+
 
 module.exports = router;

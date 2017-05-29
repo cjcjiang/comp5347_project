@@ -484,5 +484,12 @@ module.exports.showOverallPieChartPage = function(req,res) {
 module.exports.showIndiTablePage = function(req,res) {
     var revision = req.body.top_five_user;
     res.render("IndiTablePage.ejs", {top_five_user: revision});
-    console.log("Show the showIndiTablePage page");
+    console.log("Show the IndiTablePage page");
+};
+
+// Show IndividualBarChartPage.ejs
+module.exports.showIndividualBarChartPage = function(req,res) {
+    var title = req.body.user_query_title;
+    res.render("IndividualBarChartPage.ejs");
+    console.log("Show the IndividualBarChartPage page");
 };

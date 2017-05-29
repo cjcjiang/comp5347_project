@@ -15,4 +15,7 @@ $(document).ready(function(){
         $("#top_five_table").load("/showIndiTablePage", parameters_top_five);
     });
 
+    $("#indi_chart_result").load("/showIndividualBarChartPage", parameters);
+
+
 });
