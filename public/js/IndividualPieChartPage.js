@@ -1,4 +1,4 @@
-// Individual Chart two draw function
+// Individual Pie Chart two draw function
 function drawChart(reg_user_num_rev, admin_user_num_rev, bot_user_num_rev, anon_user_num_rev) {
     var data_temp = [
         ['Users', 'num_of_rev'],

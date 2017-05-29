@@ -1,4 +1,4 @@
-// Overall Chart one draw function
+// Overall Bar Chart one draw function
 function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year, admin_user_num_rev, bot_user_first_year, bot_user_num_rev, anon_user_first_year, anon_user_num_rev) {
     var data_temp = [['Year', 'admin', 'anon', 'bot', 'reg_user']];
 
