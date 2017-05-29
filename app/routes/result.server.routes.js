@@ -5,7 +5,7 @@ var router = express.Router();
 
 router.get('/', controller.showHomepage);
 // Overall task 1: The article with the most number of revisions
-router.get('/result', controller.showMostNumOfRev);
+router.get('/showMostNumOfRev', controller.showMostNumOfRev);
 router.get('/overall', controller.showOverall);
 router.get('/individual', controller.showIndividual);
 // Overall task 2: The article with the least number of revisions
