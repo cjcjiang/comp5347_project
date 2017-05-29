@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    var reg_user_num_rev;
 
     $("#result").html("here shows the success of the overall js");
 
@@ -12,10 +13,8 @@ $(document).ready(function(){
 
         // Have the test of the chart data
         $.getJSON('/showDataForOverallBarChartRegUser',null, function(revision) {
-            // console.log(revision._id);
-            // console.log(revision.numOfRev);
-            var rev_string = revision.toString();
-            $("#chart_one_result").html("The article with the most number of revisions is " + rev_string);
+            reg_user_num_rev = revision;
+            console.log("OverallBarChartRegUser length is: " + reg_user_num_rev.length);
         });
 
     });
