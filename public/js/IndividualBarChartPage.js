@@ -72,24 +72,27 @@ google.charts.load('current', {'packages':['bar']});
 $(document).ready(function(){
     // Have Reg User bar chart data
     var title = $("#user_query_title").text();
-    $.getJSON('/showDataForIndivBarChartRegUser',title, function(reg_revision) {
+    console.log("bar chart user_query_title is: " + title);
+    var parameters = {user_query_title: title};
+    $.getJSON('/showDataForIndivBarChartRegUser',parameters, function(reg_revision) {
+        console.log("reg_revision is: " + reg_revision);
         var reg_user_num_rev = reg_revision;
-        var reg_user_first_year = reg_user_num_rev[0]._id.year;
+        var reg_user_first_year = reg_user_num_rev[0]._id;
         console.log("reg_user_first_year is: " + reg_user_first_year);
         console.log("IndivBarChartRegUser length is: " + reg_user_num_rev.length);
 
         // Have admin user bar chart data
-        $.getJSON('/showDataForIndivBarChartAdminUser',title, function(admin_revision){
+        $.getJSON('/showDataForIndivBarChartAdminUser',parameters, function(admin_revision){
             var admin_user_num_rev = admin_revision;
-            var admin_user_first_year = admin_user_num_rev[0]._id.year;
+            var admin_user_first_year = admin_user_num_rev[0]._id;
             // Have bot user bar chart data
-            $.getJSON('/showDataForIndivBarChartBotUser',title, function(bot_revision){
+            $.getJSON('/showDataForIndivBarChartBotUser',parameters, function(bot_revision){
                 var bot_user_num_rev = bot_revision;
-                var bot_user_first_year = bot_user_num_rev[0]._id.year;
+                var bot_user_first_year = bot_user_num_rev[0]._id;
                 // Have anon uses bar chart data
-                $.getJSON('/showDataForIndivBarChartAnonUser',title, function(anon_revision){
+                $.getJSON('/showDataForIndivBarChartAnonUser',parameters, function(anon_revision){
                     var anon_user_num_rev = anon_revision;
-                    var anon_user_first_year = anon_user_num_rev[0]._id.year;
+                    var anon_user_first_year = anon_user_num_rev[0]._id;
                     drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year, admin_user_num_rev, bot_user_first_year, bot_user_num_rev, anon_user_first_year, anon_user_num_rev);
                 });
             });

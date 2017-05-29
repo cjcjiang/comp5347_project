@@ -297,7 +297,8 @@ module.exports.showDataForIndivBarChartRegUser = function(req,res){
     console.log("we are in showDataForIndivBarChartRegUser");
     var bot  = req.app.locals.bot;
     var admin  = req.app.locals.admin;
-    var title = req.query.title;
+    var title = req.query.user_query_title;
+    console.log("DataForIndivBarChartRegUser title is: " + title);
     Revision.dataForIndivBarChartRegUser(title, bot, admin, function(err,result){
         if (err){
             console.log("DataForIndivBarChartRegUser wrong");
@@ -313,7 +314,7 @@ module.exports.showDataForIndivBarChartRegUser = function(req,res){
 module.exports.showDataForIndivBarChartAdminUser = function(req,res){
     console.log("we are in showDataForIndivBarChartAdminUser");
     var admin  = req.app.locals.admin;
-    var title = req.query.title;
+    var title = req.query.user_query_title;
     Revision.dataForIndivBarChartAdminUser(title, admin, function(err,result){
         if (err){
             console.log("DataForIndivBarChartAdminUser wrong");
@@ -328,7 +329,7 @@ module.exports.showDataForIndivBarChartAdminUser = function(req,res){
 // Individual chart 1 (bar chart) Anonymous User
 module.exports.showDataForIndivBarChartAnonUser = function(req,res){
     console.log("we are in showDataForIndivBarChartAnonUser");
-    var title = req.query.title;
+    var title = req.query.user_query_title;
     Revision.dataForIndivBarChartAnonUser(title, function(err,result){
         if (err){
             console.log("DataForIndivBarChartAnonUser wrong");
@@ -344,7 +345,7 @@ module.exports.showDataForIndivBarChartAnonUser = function(req,res){
 module.exports.showDataForIndivBarChartBotUser = function(req,res){
     console.log("we are in showDataForIndivBarChartBotUser");
     var bot  = req.app.locals.bot;
-    var title = req.query.title;
+    var title = req.query.user_query_title;
     Revision.dataForIndivBarChartBotUser(title, bot, function(err,result){
         if (err){
             console.log("DataForIndivBarChartBotUser wrong");
