@@ -25,5 +25,15 @@ $(document).ready(function(){
         });
     });
 
+    $("#pie_chart").click(function(event){
+        event.preventDefault();
+        $("#indi_chart_result").load("/showIndividualPieChartPage", parameters);
+    });
+
+    $("#bar_chart").click(function(event){
+        event.preventDefault();
+        $("#indi_chart_result").load("/showIndividualBarChartPage", parameters);
+    });
+
 
 });

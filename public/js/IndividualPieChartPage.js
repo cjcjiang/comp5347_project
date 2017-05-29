@@ -13,6 +13,7 @@ function drawChart(reg_user_num_rev, admin_user_num_rev, bot_user_num_rev, anon_
     console.log("draw data is: " + data);
 
     var options = {
+        // no title
         title: ''
     };
 
@@ -26,21 +27,23 @@ google.charts.load('current', {'packages':['corechart']});
 $(document).ready(function(){
     // Have Reg User pie chart data
     var title = $("#user_query_title").text();
-    $.getJSON('/showDataForIndivPieChartRegUser',title, function(reg_revision) {
-        var reg_user_num_rev = reg_revision[0].RegUsers;
+    var parameters = {title: title};
+    $.getJSON('/showDataForIndivPieChartRegUser',parameters, function(reg_revision) {
+        console.log("reg_revision is: " + reg_revision.RegUsers);
+        var reg_user_num_rev = reg_revision.RegUsers;
         console.log("reg_user_num_rev is: " + reg_user_num_rev);
 
         // Have admin user pie chart data
-        $.getJSON('/showDataForIndivPieChartAdminUser',title, function(admin_revision){
-            var admin_user_num_rev = admin_revision[0].AdminUsers;
+        $.getJSON('/showDataForIndivPieChartAdminUser',parameters, function(admin_revision){
+            var admin_user_num_rev = admin_revision.AdminUsers;
 
             // Have bot user pie chart data
-            $.getJSON('/showDataForIndivPieChartBotUser',title, function(bot_revision){
-                var bot_user_num_rev = bot_revision[0].BotUsers;
+            $.getJSON('/showDataForIndivPieChartBotUser',parameters, function(bot_revision){
+                var bot_user_num_rev = bot_revision.BotUsers;
 
                 // Have anon uses pie chart data
-                $.getJSON('/showDataForIndivPieChartAnonUser',title, function(anon_revision){
-                    var anon_user_num_rev = anon_revision[0].AnonUsers;
+                $.getJSON('/showDataForIndivPieChartAnonUser',parameters, function(anon_revision){
+                    var anon_user_num_rev = anon_revision.AnonUsers;
                     drawChart(reg_user_num_rev, admin_user_num_rev, bot_user_num_rev, anon_user_num_rev);
                 });
             });
