@@ -169,7 +169,7 @@ RevisionSchema.statics.dataForOverallPieChartAdminUser = function(admin, callbac
 RevisionSchema.statics.dataForOverallPieChartBotUser = function(bot, callback){
     return this.aggregate([
         {$match: {"user":{"$in":bot}}},
-        {$count: "AnonUsers"}
+        {$count: "BotUsers"}
     ])
         .exec(callback);
 };
