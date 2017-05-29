@@ -43,6 +43,7 @@ router.get('/showUpdateResult', controller.showUpdateResult);
 router.post("/showIndividualResult", controller.showIndividualResult);
 
 router.get('/showOverallBarChartPage', controller.showOverallBarChartPage);
+router.get('/showOverallPieChartPage', controller.showOverallPieChartPage);
 
 
 module.exports = router;

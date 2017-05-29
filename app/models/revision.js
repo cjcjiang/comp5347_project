@@ -58,9 +58,9 @@ RevisionSchema.statics.findArticleSmallestRegUser = function(admin, bot, callbac
 // Overall task 5: The article with the longest history
 RevisionSchema.statics.findArticleLongestHistory = function(callback){
     return this.aggregate([
-        {$group:{_id:"$title", time:{$max:"$timestamp"}}},
-        {$sort:{time:-1}},
-        {$limit:1}
+        {$sort:{timestamp:1}},
+        {$limit:1},
+        {$project:{title:1}}
     ])
         .exec(callback);
 };
@@ -68,9 +68,9 @@ RevisionSchema.statics.findArticleLongestHistory = function(callback){
 // Overall task 6: The article with the shortest history
 RevisionSchema.statics.findArticleShortestHistory = function(callback){
     return this.aggregate([
-        {$group:{_id:"$title", time:{$max:"$timestamp"}}},
-        {$sort:{time:1}},
-        {$limit:1}
+        {$sort:{timestamp:-1}},
+        {$limit:1},
+        {$project:{title:1}}
     ])
         .exec(callback);
 };

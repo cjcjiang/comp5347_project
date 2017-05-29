@@ -24,17 +24,23 @@ $(document).ready(function(){
 
     // Overall task 5: The article with the longest history
     $.getJSON('/showArticleLongestHistory',null, function(revision) {
-        $("#showArticleLongestHistory").html("The article with the longest history: " + revision._id);
+        $("#showArticleLongestHistory").html("The article with the longest history: " + revision.title);
     });
 
     // Overall task 6: The article with the shortest history
     $.getJSON('/showArticleShortestHistory',null, function(revision) {
-        $("#showArticleShortestHistory").html("The article with the shortest history: " + revision._id);
+        $("#showArticleShortestHistory").html("The article with the shortest history: " + revision.title);
     });
 
     $("#bar_chart").click(function(event){
         event.preventDefault();
         $("#chart_result").load("/showOverallBarChartPage");
     });
+
+    $("#pie_chart").click(function(event){
+        event.preventDefault();
+        $("#chart_result").load("/showOverallPieChartPage");
+    });
+
 
 });

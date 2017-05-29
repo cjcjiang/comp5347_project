@@ -374,3 +374,9 @@ module.exports.showOverallBarChartPage = function(req,res) {
     res.render("OverallBarChartPage.ejs");
     console.log("Show the OverallBarChartPage page");
 };
+
+// Show OverallPieChartPage.ejs
+module.exports.showOverallPieChartPage = function(req,res) {
+    res.render("OverallPieChartPage.ejs");
+    console.log("Show the OverallPieChartPage page");
+};
