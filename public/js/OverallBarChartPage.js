@@ -66,7 +66,11 @@ function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year,
     console.log("start_year is: " + start_year);
     console.log("end_year is: " + end_year);
 
-
+    var ticks_array = [];
+    for(var i=start_year;i<=end_year;i++){
+        ticks_array.push(i);
+    }
+    console.log("ticks_array is: " + ticks_array);
 
     var options = {
         chart: {
@@ -78,9 +82,7 @@ function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year,
                 max: end_year,
                 min: start_year
             },
-            gridlines: {
-                count: parseInt(max_len)   // how many gridlines. You can set not the step, but total count of gridlines.
-            }
+            ticks: ticks_array
         },
         vAxis: {format: 'decimal'}
     };
