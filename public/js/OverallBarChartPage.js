@@ -55,7 +55,8 @@ function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year,
             }else{reg_num_of_rev=0;}
         }else{reg_num_of_rev=0;}
 
-        data_temp.push([year,admin_num_of_rev, anon_num_of_rev, bot_num_of_rev, reg_num_of_rev]);
+        var year_string = year.toString();
+        data_temp.push([year_string,admin_num_of_rev, anon_num_of_rev, bot_num_of_rev, reg_num_of_rev]);
         console.log("data_temp[i] is: " + data_temp[i+1]);
     }
 
@@ -63,26 +64,9 @@ function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year,
 
     console.log("draw data is: " + data);
 
-    console.log("start_year is: " + start_year);
-    console.log("end_year is: " + end_year);
-
-    var ticks_array = [];
-    for(var i=start_year;i<=end_year;i++){
-        ticks_array.push(i);
-    }
-    console.log("ticks_array is: " + ticks_array);
-
     var options = {
         chart: {
             title: 'Revision distribution by year and by user type'
-        },
-        hAxis: {
-            format: 'decimal',
-            viewWindow: {   // what range will be visible
-                max: end_year,
-                min: start_year
-            },
-            ticks: ticks_array
         },
         vAxis: {format: 'decimal'}
     };

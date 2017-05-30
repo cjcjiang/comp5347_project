@@ -73,7 +73,8 @@ $(document).ready(function(){
 
             for(var i=0;(min_year+i)<=max_year;i++){
                 var test_year = min_year+i;
-                var data_each_array = [test_year];
+                var test_year_string = test_year.toString();
+                var data_each_array = [test_year_string];
                 for(var p=0;p<users_array_len;p++){
                     var flag = 0;
                     var test_user = users_array[p];

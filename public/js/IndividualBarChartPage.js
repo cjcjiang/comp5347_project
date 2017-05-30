@@ -50,7 +50,8 @@ function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year,
             }else{reg_num_of_rev=0;}
         }else{reg_num_of_rev=0;}
 
-        data_temp.push([year,admin_num_of_rev, anon_num_of_rev, bot_num_of_rev, reg_num_of_rev]);
+        var year_string = year.toString();
+        data_temp.push([year_string,admin_num_of_rev, anon_num_of_rev, bot_num_of_rev, reg_num_of_rev]);
         console.log("data_temp[i] is: " + data_temp[i+1]);
     }
 
@@ -63,7 +64,6 @@ function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year,
         chart: {
             title: 'Revision distribution by year and by user type for article' // 加传进来的title名字
         },
-        hAxis: {format: 'decimal'},
         vAxis: {format: 'decimal'}
     };
     var chart = new google.charts.Bar(document.getElementById('chart_result_page'));
