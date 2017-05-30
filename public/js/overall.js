@@ -1,6 +1,4 @@
 $(document).ready(function(){
-    $("#showMostNumOfRev").html("here shows the success of the overall js");
-
     $.getJSON('/showMostNumOfRev',null, function(revision) {
         console.log(revision._id);
         console.log(revision.numOfRev);

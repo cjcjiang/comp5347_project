@@ -72,32 +72,46 @@ function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year,
 google.charts.load('current', {'packages':['bar']});
 
 $(document).ready(function(){
-    // Have Reg User bar chart data
     var title = $("#user_query_title").text();
     console.log("bar chart user_query_title is: " + title);
     var parameters = {user_query_title: title};
-    $.getJSON('/showDataForIndivBarChartRegUser',parameters, function(reg_revision) {
-        console.log("reg_revision is: " + reg_revision);
-        var reg_user_num_rev = reg_revision;
-        var reg_user_first_year = reg_user_num_rev[0]._id;
-        console.log("reg_user_first_year is: " + reg_user_first_year);
-        console.log("IndivBarChartRegUser length is: " + reg_user_num_rev.length);
 
-        // Have admin user bar chart data
+    var promise_bar_chart = [];
+    var reg_user_num_rev;
+    var reg_user_first_year;
+    var admin_user_num_rev;
+    var admin_user_first_year;
+    var bot_user_num_rev;
+    var bot_user_first_year;
+    var anon_user_num_rev;
+    var anon_user_first_year;
+
+    promise_bar_chart.push(
+        $.getJSON('/showDataForIndivBarChartRegUser',parameters, function(reg_revision) {
+            reg_user_num_rev = reg_revision;
+            reg_user_first_year = reg_user_num_rev[0]._id;})
+    );
+
+    promise_bar_chart.push(
         $.getJSON('/showDataForIndivBarChartAdminUser',parameters, function(admin_revision){
-            var admin_user_num_rev = admin_revision;
-            var admin_user_first_year = admin_user_num_rev[0]._id;
-            // Have bot user bar chart data
-            $.getJSON('/showDataForIndivBarChartBotUser',parameters, function(bot_revision){
-                var bot_user_num_rev = bot_revision;
-                var bot_user_first_year = bot_user_num_rev[0]._id;
-                // Have anon uses bar chart data
-                $.getJSON('/showDataForIndivBarChartAnonUser',parameters, function(anon_revision){
-                    var anon_user_num_rev = anon_revision;
-                    var anon_user_first_year = anon_user_num_rev[0]._id;
-                    drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year, admin_user_num_rev, bot_user_first_year, bot_user_num_rev, anon_user_first_year, anon_user_num_rev);
-                });
-            });
-        });
+            admin_user_num_rev = admin_revision;
+            admin_user_first_year = admin_user_num_rev[0]._id;})
+    );
+
+    promise_bar_chart.push(
+        $.getJSON('/showDataForIndivBarChartBotUser',parameters, function(bot_revision){
+            bot_user_num_rev = bot_revision;
+            bot_user_first_year = bot_user_num_rev[0]._id;})
+    );
+
+    promise_bar_chart.push(
+        $.getJSON('/showDataForIndivBarChartAnonUser',parameters, function(anon_revision){
+            anon_user_num_rev = anon_revision;
+            anon_user_first_year = anon_user_num_rev[0]._id;})
+    );
+
+    $.when.apply($, promise_bar_chart).then(function() {
+        drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year, admin_user_num_rev, bot_user_first_year, bot_user_num_rev, anon_user_first_year, anon_user_num_rev);
     });
+
 });

@@ -18,6 +18,8 @@ function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year,
     if(max_len==bot_user_num_rev_len){start_year = bot_user_first_year;}
     if(max_len==reg_user_num_rev_len){start_year = reg_user_first_year;}
 
+    var end_year = parseInt(start_year) + parseInt(max_len) -1;
+
     for(var i=0;i<max_len;i++){
         console.log("i is: " + i);
         var year = parseInt(start_year)+i;
@@ -61,12 +63,25 @@ function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year,
 
     console.log("draw data is: " + data);
 
+    console.log("start_year is: " + start_year);
+    console.log("end_year is: " + end_year);
+
+
 
     var options = {
         chart: {
             title: 'Revision distribution by year and by user type'
         },
-        hAxis: {format: 'decimal'},
+        hAxis: {
+            format: 'decimal',
+            viewWindow: {   // what range will be visible
+                max: end_year,
+                min: start_year
+            },
+            gridlines: {
+                count: parseInt(max_len)   // how many gridlines. You can set not the step, but total count of gridlines.
+            }
+        },
         vAxis: {format: 'decimal'}
     };
     var chart = new google.charts.Bar(document.getElementById('chart_result_page'));
@@ -75,28 +90,42 @@ function drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year,
 google.charts.load('current', {'packages':['bar']});
 
 $(document).ready(function(){
-    // Have Reg User bar chart data
-    $.getJSON('/showDataForOverallBarChartRegUser',null, function(reg_revision) {
-        var reg_user_num_rev = reg_revision;
-        var reg_user_first_year = reg_user_num_rev[0]._id.year;
-        console.log("reg_user_first_year is: " + reg_user_first_year);
-        console.log("OverallBarChartRegUser length is: " + reg_user_num_rev.length);
+    var promise_bar_chart = [];
+    var reg_user_num_rev;
+    var reg_user_first_year;
+    var admin_user_num_rev;
+    var admin_user_first_year;
+    var bot_user_num_rev;
+    var bot_user_first_year;
+    var anon_user_num_rev;
+    var anon_user_first_year;
 
-        // Have admin user bar chart data
+    promise_bar_chart.push(
+        $.getJSON('/showDataForOverallBarChartRegUser',null, function(reg_revision) {
+            reg_user_num_rev = reg_revision;
+            reg_user_first_year = reg_user_num_rev[0]._id.year;})
+    );
+
+    promise_bar_chart.push(
         $.getJSON('/showDataForOverallBarChartAdminUser',null, function(admin_revision){
-            var admin_user_num_rev = admin_revision;
-            var admin_user_first_year = admin_user_num_rev[0]._id.year;
-            // Have bot user bar chart data
-            $.getJSON('/showDataForOverallBarChartBotUser',null, function(bot_revision){
-                var bot_user_num_rev = bot_revision;
-                var bot_user_first_year = bot_user_num_rev[0]._id.year;
-                // Have anon uses bar chart data
-                $.getJSON('/showDataForOverallBarChartAnonUser',null, function(anon_revision){
-                    var anon_user_num_rev = anon_revision;
-                    var anon_user_first_year = anon_user_num_rev[0]._id.year;
-                    drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year, admin_user_num_rev, bot_user_first_year, bot_user_num_rev, anon_user_first_year, anon_user_num_rev);
-                });
-            });
-        });
+            admin_user_num_rev = admin_revision;
+            admin_user_first_year = admin_user_num_rev[0]._id.year;})
+    );
+
+    promise_bar_chart.push(
+        $.getJSON('/showDataForOverallBarChartBotUser',null, function(bot_revision){
+            bot_user_num_rev = bot_revision;
+            bot_user_first_year = bot_user_num_rev[0]._id.year;})
+    );
+
+    promise_bar_chart.push(
+        $.getJSON('/showDataForOverallBarChartAnonUser',null, function(anon_revision){
+            anon_user_num_rev = anon_revision;
+            anon_user_first_year = anon_user_num_rev[0]._id.year;})
+    );
+
+    $.when.apply($, promise_bar_chart).then(function() {
+        drawChart(reg_user_first_year, reg_user_num_rev, admin_user_first_year, admin_user_num_rev, bot_user_first_year, bot_user_num_rev, anon_user_first_year, anon_user_num_rev);
     });
+
 });

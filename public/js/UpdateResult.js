@@ -4,6 +4,7 @@ $(document).ready(function(){
     var parameters = {user_query_title: title, user_query_timestamp: timestamp};
 
     $("#update_show").hide();
+    $('#update_result').html("Checking if the data in the database is up to date");
 
     $.get( "/showUpdateResult",parameters, function(result){
         console.log(result);
