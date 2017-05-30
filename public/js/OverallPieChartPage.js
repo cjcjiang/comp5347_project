@@ -24,25 +24,35 @@ function drawChart(reg_user_num_rev, admin_user_num_rev, bot_user_num_rev, anon_
 google.charts.load('current', {'packages':['corechart']});
 
 $(document).ready(function(){
-    // Have Reg User pie chart data
-    $.getJSON('/showDataForOverallPieChartRegUser',null, function(reg_revision) {
-        var reg_user_num_rev = reg_revision[0].RegUsers;
-        console.log("reg_user_num_rev is: " + reg_user_num_rev);
+    var promise_pie_chart = [];
+    var reg_user_num_rev;
+    var admin_user_num_rev;
+    var bot_user_num_rev;
+    var anon_user_num_rev;
 
-        // Have admin user pie chart data
+    promise_pie_chart.push(
+        $.getJSON('/showDataForOverallPieChartRegUser',null, function(reg_revision) {
+            reg_user_num_rev = reg_revision[0].RegUsers;})
+    );
+
+    promise_pie_chart.push(
         $.getJSON('/showDataForOverallPieChartAdminUser',null, function(admin_revision){
-            var admin_user_num_rev = admin_revision[0].AdminUsers;
+            admin_user_num_rev = admin_revision[0].AdminUsers;})
+    );
 
-            // Have bot user pie chart data
-            $.getJSON('/showDataForOverallPieChartBotUser',null, function(bot_revision){
-                var bot_user_num_rev = bot_revision[0].BotUsers;
+    promise_pie_chart.push(
+        $.getJSON('/showDataForOverallPieChartBotUser',null, function(bot_revision){
+            bot_user_num_rev = bot_revision[0].BotUsers;})
+    );
 
-                // Have anon uses pie chart data
-                $.getJSON('/showDataForOverallPieChartAnonUser',null, function(anon_revision){
-                    var anon_user_num_rev = anon_revision[0].AnonUsers;
-                    drawChart(reg_user_num_rev, admin_user_num_rev, bot_user_num_rev, anon_user_num_rev);
-                });
-            });
-        });
-    });
+    promise_pie_chart.push(
+        $.getJSON('/showDataForOverallPieChartAnonUser',null, function(anon_revision){
+            anon_user_num_rev = anon_revision[0].AnonUsers;})
+    );
+
+    $.when.apply($, promise_pie_chart).then(function(){
+            drawChart(reg_user_num_rev, admin_user_num_rev, bot_user_num_rev, anon_user_num_rev);
+        }
+    );
+
 });
