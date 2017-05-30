@@ -536,14 +536,14 @@ module.exports.showUpdateResult = function(req,res){
                             });
                         }else{
                             // If the revision_last_timestamp_date and latest_revision_date is the same
-                            back_client_message = "<h4>Database already has the latest revision.</h4>";
+                            back_client_message = "<h4>Checked with MediaWikiApi, database already has the latest revision. So nothing is added into the database</h4>";
                             res.send(back_client_message);
                         }
                     }
                 });
             }else{
                 console.log("In showUpdateResult, user_query_date is smaller than latest_revision_date for one day, the database do not need to be updated");
-                back_client_message = "<h4>Database already has the latest revision.</h4>";
+                back_client_message = "<h4>The difference between the user query time and the latest revision(stored in database) time is less than one day. No data pull request.</h4>";
                 res.send(back_client_message);
             }
 
